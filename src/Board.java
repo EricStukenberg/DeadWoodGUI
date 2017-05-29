@@ -193,8 +193,6 @@ class Board {
       Set currLocation = currPlayer.getLocation();
       String currRole;
       StringBuilder sb = new StringBuilder();
-      System.out.println("Length of command entered " + len);
-      System.out.println(words[0]);
       if(currPlayer.getRole() == null) {
         for(int i = 1; i < len; i++) {
           sb.append(words[i]);
@@ -257,7 +255,7 @@ class Board {
         }
 
       } else {
-        System.out.print("Player is already in a role");
+        System.out.println("Player is already in a role");
       }
     }
     private void upgradeMoney(String[] words, Player currPlayer) {
@@ -329,6 +327,8 @@ class Board {
         }
         else {
           currPlayer.rehearse();
+          System.out.println("One practice chip added " + currPlayer.getName() + " has " + currPlayer.getRole().getPracticeChips());
+
         }
       }
     }
@@ -337,8 +337,7 @@ class Board {
         currPlayer.canAct = false;
         int roll = rollDie();
 
-        if (roll >=  (currPlayer.getLocation().getScenecard().getBudget() + currPlayer.getRole().getPracticeChips())) {
-          System.out.println("Act succeeded " + "yo");
+        if ((roll + currPlayer.getRole().getPracticeChips()) >=  (currPlayer.getLocation().getScenecard().getBudget())) {
           if (currPlayer.getRole().getOnCard()) {
             System.out.println("Act succeeded you got 2cr");
             currPlayer.updatesCredits(2);
@@ -492,3 +491,4 @@ class Board {
      }
    }
 }
+
