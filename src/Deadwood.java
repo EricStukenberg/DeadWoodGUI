@@ -17,9 +17,11 @@ import java.awt.event.*;
 
 
 
+
 public class Deadwood {
 
-      private JFrame mainFrame;
+  public Board gameBoard;
+  private JFrame mainFrame;
 
   public static void main( String[] args ) {
     JFrame frame = new JFrame();

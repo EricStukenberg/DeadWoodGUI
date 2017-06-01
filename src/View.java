@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import java.awt.event.*;
+import org.w3c.dom.Element;
 
 
 public class View extends JFrame {
@@ -30,7 +31,7 @@ public class View extends JFrame {
 
   // Constructor
 
-  public View() {
+  public View(Board model) {
 
     // Set the title of the JFrame
     super("Deadwood");
@@ -40,6 +41,7 @@ public class View extends JFrame {
     // Create the JLayeredPane to hold the display, cards, role dice and buttons
 
     bPane = getLayeredPane();
+    XMLParse xml = new XMLParse();
 
     // Create the deadwood board
     boardlabel = new JLabel();
@@ -55,15 +57,18 @@ public class View extends JFrame {
 
     ImageIcon cIcon =  new ImageIcon("../resources/cardback.png");
     cardlabel = new JLabel[10];
+    Element set;
 
-    // Add a scene card to this room
+    // Add a scene card to the sets
     for (int i = 0; i < 10; i++) {
       cardlabel[i] = new JLabel();
       cardlabel[i].setIcon(cIcon);
-      cardlabel[i].setBounds(21,69,cIcon.getIconWidth(),cIcon.getIconHeight());
+
+      set = xml.getBoardElement(model.sets[i].getName());
+      cardlabel[i].setBounds(Integer.parseInt(set.getAttribute("x")),Integer.parseInt(set.getAttribute("y")),115,205);
       cardlabel[i].setOpaque(true);
 
-      // Add the board to the lower layer
+      // Add the card to the lower layer
       bPane.add(cardlabel[i], new Integer(1));
     }
 
@@ -111,7 +116,7 @@ public class View extends JFrame {
     bPane.add(bMove, new Integer(2));
   }
 
-  // This class implements Mouse Events
+  //Controller stuff needs to be moveed
 
   class boardMouseListener implements MouseListener{
 
@@ -138,10 +143,4 @@ public class View extends JFrame {
     }
    }
 
-
-  public static void main(String[] args) {
-    View board = new View();
-    board.getContentPane().setPreferredSize(new Dimension(750,200));
-    board.setVisible(true);
-  }
 }
