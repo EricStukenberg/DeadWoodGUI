@@ -69,7 +69,10 @@ public class View extends JFrame {
       cardlabel[i].setIcon(cIcon);
 
       set = xml.getBoardElement(model.sets[i].getName());
-      cardlabel[i].setBounds(Integer.parseInt(set.getAttribute("x")),Integer.parseInt(set.getAttribute("y")),115,205);
+      Element area = (Element) set.getElementsByTagName("area").item(0);
+      // System.out.println(area.getAttribute("x"));
+      // System.out.println(set.getAttribute("name"));
+      cardlabel[i].setBounds(Integer.parseInt(area.getAttribute("x")),Integer.parseInt(area.getAttribute("y")),205,115);
       cardlabel[i].setOpaque(true);
 
       // Add the card to the lower layer
