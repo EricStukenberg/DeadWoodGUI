@@ -27,10 +27,10 @@ public class Deadwood {
     JFrame frame = new JFrame();
     JLayeredPane pane = new JLayeredPane();
     Board model = beginGame();
-    playGame(model);
     View view = new View(model);
     view.getContentPane().setPreferredSize(new Dimension(750,200));
     view.setVisible(true);
+    playGame(model);
 
   }
   /*

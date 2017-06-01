@@ -16,6 +16,7 @@ CLASSES = \
 	Set.java \
 	XMLParse.java \
 	BoardLayersListener.java \
+	View.java \
 	Deadwood.java
 
 MAIN = DeadWood

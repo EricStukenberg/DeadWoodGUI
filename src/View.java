@@ -7,6 +7,10 @@ import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import java.awt.event.*;
 import org.w3c.dom.Element;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+import org.w3c.dom.Element;
 
 
 public class View extends JFrame {

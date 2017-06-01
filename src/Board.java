@@ -466,7 +466,7 @@ class Board {
     * role name/rank/line/role name/rank/line etc.
     */
    private void readSetRoles() {
-     File file = new File("offcard.txt");
+     File file = new File("../resources/offcard.txt");
      try {
        Scanner scanlines = new Scanner(file);
        int count = 0;

@@ -8,8 +8,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 public class XMLParse {
-  public static NodeList boardList;
-  public static NodeList cardsList;
+  //public static NodeList boardList;
+//  public static NodeList cardsList;
   public void XMLParse() {
       try {
           File boardXML = new File("../resources/board.xml");
@@ -22,8 +22,8 @@ public class XMLParse {
           docBoard.getDocumentElement().normalize();
           docCards.getDocumentElement().normalize();
 
-          boardList = docBoard.getElementsByTagName("set");
-          cardsList = docBoard.getElementsByTagName("card");
+        //  boardList = docBoard.getElementsByTagName("set");
+        //  cardsList = docCards.getElementsByTagName("card");
 
 
       } catch (Exception e){
@@ -37,34 +37,61 @@ public class XMLParse {
   // the Element
   public Element getCardElement(String name) {
     Element card = null;
-    for(int i = 0; i < cardsList.getLength(); i++) {
-      Node currNode = cardsList.item(i);
-      if(currNode.getNodeType() == Node.ELEMENT_NODE) {
-        Element currCard = (Element) currNode;
-        String cardName = currCard.getAttribute("name");
-        if(cardName.equals(name)) {
-           card = currCard;
-           break;
+    try {
+      File boardXML = new File("../resources/board.xml");
+      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+      DocumentBuilder db = dbf.newDocumentBuilder();
+      Document docBoard = db.parse(boardXML);
+
+      docBoard.getDocumentElement().normalize();
+
+      NodeList boardList = docBoard.getElementsByTagName("card");
+      for(int i = 0; i < boardList.getLength(); i++) {
+        Node currNode = boardList.item(i);
+        if(currNode.getNodeType() == Node.ELEMENT_NODE) {
+          Element currCard= (Element) currNode;
+          String cardName = currCard.getAttribute("name");
+          if(cardName.equals(name)) {
+             card = currCard;
+             break;
+          }
         }
       }
+    } catch (Exception e){
+          e.printStackTrace();
+          System.exit(1);
     }
     return card;
   }
 
-  // takes in name of set and searches through list and returns
+
+  // takes in name of card and searches through list and returns
   // the Element
   public Element getBoardElement(String name) {
     Element set = null;
-    for(int i = 0; i < boardList.getLength(); i++) {
-      Node currNode = boardList.item(i);
-      if(currNode.getNodeType() == Node.ELEMENT_NODE) {
-        Element currSet= (Element) currNode;
-        String setName = currSet.getAttribute("name");
-        if(setName.equals(name)) {
-           set = currSet;
-           break;
+    try {
+      File boardXML = new File("../resources/board.xml");
+      DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+      DocumentBuilder db = dbf.newDocumentBuilder();
+      Document docBoard = db.parse(boardXML);
+
+      docBoard.getDocumentElement().normalize();
+
+      NodeList boardList = docBoard.getElementsByTagName("set");
+      for(int i = 0; i < boardList.getLength(); i++) {
+        Node currNode = boardList.item(i);
+        if(currNode.getNodeType() == Node.ELEMENT_NODE) {
+          Element currSet= (Element) currNode;
+          String setName = currSet.getAttribute("name");
+          if(setName.equals(name)) {
+             set = currSet;
+             break;
+          }
         }
       }
+    } catch (Exception e){
+          e.printStackTrace();
+          System.exit(1);
     }
     return set;
   }
