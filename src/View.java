@@ -59,16 +59,16 @@ public class View extends JFrame {
     cardlabel = new JLabel[10];
     Element set;
 
-    // Add a scene card to this room
+    // Add a scene card to the sets
     for (int i = 0; i < 10; i++) {
       cardlabel[i] = new JLabel();
       cardlabel[i].setIcon(cIcon);
 
       set = xml.getBoardElement(model.sets[i].getName());
-      cardlabel[i].setBounds(21,69,cIcon.getIconWidth(),cIcon.getIconHeight());
+      cardlabel[i].setBounds(Integer.parseInt(set.getAttribute("x")),Integer.parseInt(set.getAttribute("y")),115,205);
       cardlabel[i].setOpaque(true);
 
-      // Add the board to the lower layer
+      // Add the card to the lower layer
       bPane.add(cardlabel[i], new Integer(1));
     }
 
