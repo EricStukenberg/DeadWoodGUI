@@ -29,6 +29,7 @@ public class View extends JFrame {
   JButton bAct;
   JButton bRehearse;
   JButton bMove;
+  Viewset sets[];
 
   // JLayered Pane
   JLayeredPane bPane;
@@ -59,25 +60,16 @@ public class View extends JFrame {
     // Set the size of the GUI
     setSize(icon.getIconWidth()+200,icon.getIconHeight());
 
-    ImageIcon cIcon =  new ImageIcon("../resources/cardback.png");
-    cardlabel = new JLabel[10];
-    Element set;
+    //Grab the images to be used on each set
+    sets = new Viewset[10];
 
-    // Add a scene card to the sets
+    // Add a JLabel to the scene positions on each set
     for (int i = 0; i < 10; i++) {
-      cardlabel[i] = new JLabel();
-      cardlabel[i].setIcon(cIcon);
-
-      set = xml.getBoardElement(model.sets[i].getName());
-      Element area = (Element) set.getElementsByTagName("area").item(0);
-      // System.out.println(area.getAttribute("x"));
-      // System.out.println(set.getAttribute("name"));
-      cardlabel[i].setBounds(Integer.parseInt(area.getAttribute("x")),Integer.parseInt(area.getAttribute("y")),205,115);
-      cardlabel[i].setOpaque(true);
-
-      // Add the card to the lower layer
-      bPane.add(cardlabel[i], new Integer(1));
+      sets[i] = new Viewset(i, model);
+      // Add the cards to the lower layer
+      bPane.add(sets[i].cardlabel, new Integer(1));
     }
+
 
 
 
