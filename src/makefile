@@ -14,6 +14,8 @@ CLASSES = \
 	Scene.java \
 	Trailers.java \
 	Set.java \
+	XMLParse.java \
+	BoardLayersListener.java \
 	Deadwood.java
 
 MAIN = DeadWood

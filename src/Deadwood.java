@@ -7,10 +7,23 @@
 */
 import java.util.*;
 import java.io.*;
+import java.awt.event.*;
+import javax.swing.*;
+import javax.imageio.*;
+import java.io.*;
+import java.awt.image.*;
+import java.awt.Dimension;
+import java.awt.event.*;
+
+
 
 public class Deadwood {
 
+      private JFrame mainFrame;
+
   public static void main( String[] args ) {
+    JFrame frame = new JFrame();
+    JLayeredPane pane = new JLayeredPane();
     Board gameBoard = beginGame();
     playGame(gameBoard);
   }
