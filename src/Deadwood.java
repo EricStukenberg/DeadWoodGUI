@@ -24,8 +24,12 @@ public class Deadwood {
   public static void main( String[] args ) {
     JFrame frame = new JFrame();
     JLayeredPane pane = new JLayeredPane();
-    Board gameBoard = beginGame();
-    playGame(gameBoard);
+    Board model = beginGame();
+    playGame(model);
+    View view = new View();
+    view.getContentPane().setPreferredSize(new Dimension(750,200));
+    view.setVisible(true);
+
   }
   /*
   * Start the entire game
@@ -50,8 +54,8 @@ public class Deadwood {
   /*
     Plays game
   */
-  private static void playGame(Board gameBoard) {
-    gameBoard.startGame();
+  private static void playGame(Board model) {
+    model.startGame();
 
   }
 }
