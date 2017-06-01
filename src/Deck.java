@@ -33,7 +33,7 @@ class Deck {
    * title/scene number/budget/number of roles
    */
   private void readScenes() {
-    File file = new File("scenes.txt");
+    File file = new File("../resources/scenes.txt");
     try {
       Scanner scanlines = new Scanner(file);
       int count = 0;
@@ -55,7 +55,7 @@ class Deck {
 
   // Reads text file for scene descriptions
   private void readDescriptions() {
-    File file = new File("descriptions.txt");
+    File file = new File("../resources/descriptions.txt");
     try {
       Scanner scan = new Scanner(file);
       int count = 0;
@@ -73,7 +73,7 @@ class Deck {
    * role name/rank/line/role name/rank/line etc.
    */
   private void readRoles() {
-    File file = new File("oncard.txt");
+    File file = new File("../resources/oncard.txt");
     try {
       Scanner scanlines = new Scanner(file);
       int count = 0;

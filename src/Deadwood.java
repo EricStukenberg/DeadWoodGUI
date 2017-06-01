@@ -28,7 +28,7 @@ public class Deadwood {
     JLayeredPane pane = new JLayeredPane();
     Board model = beginGame();
     playGame(model);
-    View view = new View();
+    View view = new View(model);
     view.getContentPane().setPreferredSize(new Dimension(750,200));
     view.setVisible(true);
 
