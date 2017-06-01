@@ -8,12 +8,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 public class XMLParse {
-  static NodeList boardList;
-  static NodeList cardsList;
-  public static void main(String argv[]) {
+  public static NodeList boardList;
+  public static NodeList cardsList;
+  public void XMLParse() {
       try {
-          File boardXML = new File("board.xml");
-          File cardsXML = new File("cards.xml");
+          File boardXML = new File("../resources/board.xml");
+          File cardsXML = new File("../resources/cards.xml");
           DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
           DocumentBuilder db = dbf.newDocumentBuilder();
           Document docBoard = db.parse(boardXML);
