@@ -22,7 +22,9 @@ public class Viewset extends JFrame {
   public JLabel shotlabels[];
   public String name;
   public Element cardArea;
+  public Element takes[];
   public Element set;
+  public int takeCount;
 
 
   // Constructor
@@ -30,20 +32,34 @@ public class Viewset extends JFrame {
     name = model.sets[i].getName();
     XMLParse xml = new XMLParse();
 
-    //Grab the images to be used on each set
+    // Grab our intial image for the scene cards
     ImageIcon cIcon =  new ImageIcon("../resources/cardback.png");
-    ImageIcon sIcon =  new ImageIcon("../resources/shot.png");
     cardlabel = new JLabel();
-    shotlabels = new JLabel[3]; //temp
 
     // Add a JLabel to the scene position on the set
     cardlabel = new JLabel();
     cardlabel.setIcon(cIcon);
 
-    //Grab each set in the xml document and find its area element
+    //Grab each set in the xml document and find its card area element
     set = xml.getBoardElement(name);
     cardArea = (Element) set.getElementsByTagName("area").item(0);
     cardlabel.setBounds(Integer.parseInt(cardArea.getAttribute("x")),Integer.parseInt(cardArea.getAttribute("y")),205,115);
     cardlabel.setOpaque(true);
+
+    // Shot counters
+    ImageIcon sIcon =  new ImageIcon("../resources/shot.png");
+    takeCount = model.sets[i].getShots();
+    shotlabels = new JLabel[takeCount];
+    takes = new Element[takeCount];
+
+    for (int j = 0; j < takeCount; j++) {
+      shotlabels[j] = new JLabel();
+      shotlabels[j].setIcon(sIcon);
+      takes[j] = (Element) set.getElementsByTagName("takes").item(j);
+      Element takeArea = (Element) takes[j].getElementsByTagName("area");
+      shotlabels[j].setBounds(Integer.parseInt(takeArea.getAttribute("x")),Integer.parseInt(takeArea.getAttribute("y")),46,46);
+      shotlabels[j].setOpaque(true);
+
+    }
   }
 }
