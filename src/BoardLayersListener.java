@@ -18,66 +18,79 @@ import java.awt.event.*;
 public class BoardLayersListener extends JFrame {
 
   // Private Attributes
-  
+
   // JLabels
   JLabel boardlabel;
   JLabel cardlabel;
-  JLabel playerlabel;
+  JLabel card2label;
+  JLabel player1label;
+  JLabel player2label;
   JLabel mLabel;
-  
+
   //JButtons
   JButton bAct;
   JButton bRehearse;
   JButton bMove;
-  
+
   // JLayered Pane
   JLayeredPane bPane;
-  
+
   // Constructor
-  
+
   public BoardLayersListener() {
-      
+
        // Set the title of the JFrame
        super("Deadwood");
        // Set the exit option for the JFrame
        setDefaultCloseOperation(EXIT_ON_CLOSE);
-      
+
        // Create the JLayeredPane to hold the display, cards, role dice and buttons
 
        bPane = getLayeredPane();
-    
+
        // Create the deadwood board
        boardlabel = new JLabel();
-       ImageIcon icon =  new ImageIcon("board.jpg");
-       boardlabel.setIcon(icon); 
+       ImageIcon icon =  new ImageIcon("../resources/board.jpg");
+       boardlabel.setIcon(icon);
        boardlabel.setBounds(0,0,icon.getIconWidth(),icon.getIconHeight());
-      
+
        // Add the board to the lower layer
        bPane.add(boardlabel, new Integer(0));
-      
+
        // Set the size of the GUI
        setSize(icon.getIconWidth()+200,icon.getIconHeight());
-       
+
        // Add a scene card to this room
        cardlabel = new JLabel();
-       ImageIcon cIcon =  new ImageIcon("01.png");
-       cardlabel.setIcon(cIcon); 
-       cardlabel.setBounds(20,60,cIcon.getIconWidth(),cIcon.getIconHeight());
+       card2label = new JLabel();
+       ImageIcon cIcon =  new ImageIcon("../resources/01.png");
+       ImageIcon c2Icon =  new ImageIcon("../resources/cardback.png");
+       cardlabel.setIcon(cIcon);
+       card2label.setIcon(c2Icon);
+       cardlabel.setBounds(21,69,cIcon.getIconWidth(),cIcon.getIconHeight());
+       card2label.setBounds(27, 732,cIcon.getIconWidth(),cIcon.getIconHeight());
        cardlabel.setOpaque(true);
-      
+       card2label.setOpaque(true);
+
        // Add the board to the lower layer
        bPane.add(cardlabel, new Integer(1));
+        bPane.add(card2label, new Integer(1));
 
-    
-       // Add a dice to represent a player. 
+
+       // Add a dice to represent a player.
        // Role for Crusty the prospector. The x and y co-ordiantes are taken from Board.xml file
-       playerlabel = new JLabel();
-       ImageIcon pIcon = new ImageIcon("r2.png");
-       playerlabel.setIcon(pIcon);
-       //playerlabel.setBounds(114,227,pIcon.getIconWidth(),pIcon.getIconHeight());  
-       playerlabel.setBounds(114,227,46,46);
-       bPane.add(playerlabel,new Integer(3));
-      
+       player1label = new JLabel();
+       player2label = new JLabel();
+       ImageIcon p1Icon = new ImageIcon("../resources/r2.png");
+       ImageIcon p2Icon = new ImageIcon("../resources/b2.png");
+       player1label.setIcon(p1Icon);
+       player2label.setIcon(p2Icon);
+       //playerlabel.setBounds(114,227,pIcon.getIconWidth(),pIcon.getIconHeight());
+       player1label.setBounds(991,248,194,201);
+       player2label.setBounds(981,248,194,201);
+       bPane.add(player1label,new Integer(3));
+       bPane.add(player2label,new Integer(3));
+
        // Create the Menu for action buttons
        mLabel = new JLabel("MENU");
        mLabel.setBounds(icon.getIconWidth()+40,0,100,20);
@@ -88,31 +101,31 @@ public class BoardLayersListener extends JFrame {
        bAct.setBackground(Color.white);
        bAct.setBounds(icon.getIconWidth()+10, 30,100, 20);
        bAct.addMouseListener(new boardMouseListener());
-       
+
        bRehearse = new JButton("REHEARSE");
        bRehearse.setBackground(Color.white);
        bRehearse.setBounds(icon.getIconWidth()+10,60,100, 20);
        bRehearse.addMouseListener(new boardMouseListener());
-       
+
        bMove = new JButton("MOVE");
        bMove.setBackground(Color.white);
        bMove.setBounds(icon.getIconWidth()+10,90,100, 20);
        bMove.addMouseListener(new boardMouseListener());
 
-   
+
        // Place the action buttons in the top layer
        bPane.add(bAct, new Integer(2));
        bPane.add(bRehearse, new Integer(2));
        bPane.add(bMove, new Integer(2));
   }
-  
+
   // This class implements Mouse Events
-  
+
   class boardMouseListener implements MouseListener{
-  
+
       // Code for the different button clicks
       public void mouseClicked(MouseEvent e) {
-         
+
          if (e.getSource()== bAct){
             System.out.println("Acting is Selected\n");
          }
@@ -121,7 +134,7 @@ public class BoardLayersListener extends JFrame {
          }
          else if (e.getSource()== bMove){
             System.out.println("Move is Selected\n");
-         }         
+         }
       }
       public void mousePressed(MouseEvent e) {
       }
@@ -136,6 +149,7 @@ public class BoardLayersListener extends JFrame {
 
   public static void main(String[] args) {
     BoardLayersListener board = new BoardLayersListener();
+    board.getContentPane().setPreferredSize(new Dimension(750,200));
     board.setVisible(true);
   }
 }
