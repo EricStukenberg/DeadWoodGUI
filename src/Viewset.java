@@ -21,7 +21,7 @@ public class Viewset extends JFrame {
   public JLabel shotlabels[];
   public String name;
   public Element cardArea;
-  public Element takes[];
+  public Element take;
   public Element set;
   public int takeCount;
 
@@ -49,16 +49,15 @@ public class Viewset extends JFrame {
     ImageIcon sIcon =  new ImageIcon("../resources/shot.png");
     takeCount = model.sets[i].getShots();
     shotlabels = new JLabel[takeCount];
-    takes = new Element[takeCount];
+
 
     for (int j = 0; j < takeCount; j++) {
       shotlabels[j] = new JLabel();
       shotlabels[j].setIcon(sIcon);
-      takes[j] = (Element) set.getElementsByTagName("takes").item(j);
-    //  Element takeArea = (Element) takes[j].getElementsByTagName("area");
-      //shotlabels[j].setBounds(Integer.parseInt(takeArea.getAttribute("x")),Integer.parseInt(takeArea.getAttribute("y")),46,46);
-    //  shotlabels[j].setOpaque(true);
-
+      take = (Element) set.getElementsByTagName("take").item(j);
+      Element area = (Element) take.getElementsByTagName("area").item(0);
+      shotlabels[j].setBounds(Integer.parseInt(area.getAttribute("x")),Integer.parseInt(area.getAttribute("y")),46,46);
+      shotlabels[j].setOpaque(true);
     }
   }
 }
