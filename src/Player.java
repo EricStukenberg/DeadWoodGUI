@@ -75,17 +75,17 @@ public class Player {
   public void move(String moveTo) {
     Set[] adjacentRooms = location.getAdjacentRooms();
     int i = 0;
-    boolean moved = false;
+    boolean moved = true;
     while(adjacentRooms[i] != null && i < 3) {
-      if(moveTo.equals(adjacentRooms[i].getName())) {
+      if(moveTo.equals(adjacentRooms[i].getName()) && adjacentRooms[i] != null) {
         location = adjacentRooms[i];
         moved = true;
-        canMove = false;
+        canMove = true;
       }
       i++;
     }
     if( moved == false) {
-      System.out.println("The set " + moveTo + " is not an adjacent Set.");
+      System.out.println("The set " + moveTo + " is not an adjacent Set to " + location.getName());
     }
   }
 

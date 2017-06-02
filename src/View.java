@@ -19,6 +19,7 @@ public class View extends JFrame {
   JLabel cardlabel[];
   JLabel card2label;
   JLabel playerlabel[];
+  JLabel playerInfo;
 
 
   JLabel mLabel;
@@ -172,11 +173,12 @@ public class View extends JFrame {
 
        }else if (e.getSource()== bEnd){
              System.out.println("End turn is Selected\n");
+             model.endClick = true;
              model.readUserInput("end", currPlayer);
 
        } else if (e.getSource()== bRoom1){
           String roomName = rooms[0].getName();
-          currPlayer.move(roomName);
+          model.readUserInput("move " + roomName, currPlayer);
           moved = true;
           String newLoc = currPlayer.getLocation().getName();
           System.out.println("The player moved to " + newLoc);
@@ -185,30 +187,30 @@ public class View extends JFrame {
 
 
        } else if (e.getSource()== bRoom2){
-         String roomName = rooms[1].getName();
-         System.out.println("Selected Move to "  + roomName);
-         currPlayer.move(roomName);
-         moved = true;
-         showPlayers(model.getNumberOfPlayers(), model);
-         updateButtons();
+           String roomName = rooms[1].getName();
+           System.out.println("Selected Move to "  + roomName);
+           currPlayer.move(roomName);
+           moved = true;
+           showPlayers(model.getNumberOfPlayers(), model);
+           updateButtons();
 
 
        } else if (e.getSource()== bRoom3){
-         String roomName = rooms[2].getName();
-         System.out.println("Selected Move to "  + roomName);
-         currPlayer.move(roomName);
-         moved = true;
-         showPlayers(model.getNumberOfPlayers(), model);
-         updateButtons();
+           String roomName = rooms[2].getName();
+           System.out.println("Selected Move to "  + roomName);
+           currPlayer.move(roomName);
+           moved = true;
+           showPlayers(model.getNumberOfPlayers(), model);
+           updateButtons();
 
 
        } else if (e.getSource()== bRoom4){
-         String roomName = rooms[3].getName();
-         System.out.println("Selected Move to "  + roomName);
-         currPlayer.move(roomName);
-         moved = true;
-         showPlayers(model.getNumberOfPlayers(), model);
-         updateButtons();
+           String roomName = rooms[3].getName();
+           System.out.println("Selected Move to "  + roomName);
+           currPlayer.move(roomName);
+           moved = true;
+           showPlayers(model.getNumberOfPlayers(), model);
+           updateButtons();
        }
 
     }
@@ -258,7 +260,10 @@ public class View extends JFrame {
      // Create the Menu for action buttons
 
      mLabel = new JLabel("MENU");
-     mLabel.setBounds(icon.getIconWidth()+40,0,200,20);
+     mLabel.setBounds(icon.getIconWidth()+40,5,200,20);
+     Color customColor = new Color(153,76,2);
+     mLabel.setForeground(customColor);
+     mLabel.setFont(new Font("Courier New", Font.BOLD, 18));
      bPane.add(mLabel,new Integer(2));
 
      // Create Action buttons
@@ -279,8 +284,11 @@ public class View extends JFrame {
      Set location = player.getLocation();
      Set[] neighbors = location.getAdjacentRooms();
      int numNB = 0;
-     while(neighbors[numNB] != null) {
-       numNB++;
+     for(int i = 0; i < 4; i++) {
+       if(neighbors[i] != null) {
+         System.out.println("Num rooms " + numNB);
+         numNB++;
+       }
      }
      String room1 = neighbors[0].getName();
      String room2 = neighbors[1].getName();
@@ -315,6 +323,8 @@ public class View extends JFrame {
      bRoom4.setBackground(Color.white);
      bRoom4.setBounds(icon.getIconWidth()+10,180,200, 20);
      bPane.add(bRoom4, new Integer(2));
+     bRoom4.addMouseListener(new boardMouseListener());
+
 
      bEnd = new JButton("END TURN");
      bEnd.setBackground(Color.white);
@@ -329,12 +339,11 @@ public class View extends JFrame {
     Set location = player.getLocation();
     Set[] neighbors = location.getAdjacentRooms();
     int numNB = 0;
-    while(neighbors[numNB] != null) {
-      System.out.println("Num rooms " + numNB);
-      if(numNB == 3) {
-        break;
+    for(int i = 0; i < 4; i++) {
+      if(neighbors[i] != null) {
+        System.out.println("Num rooms " + numNB);
+        numNB++;
       }
-      numNB++;
     }
     String room1 = neighbors[0].getName();
     String room2 = neighbors[1].getName();
@@ -346,13 +355,15 @@ public class View extends JFrame {
     bRoom3.setText("Move to " + room3);
     bPane.add(bRoom3, new Integer(2));
 
-    String room4 = "    ";
-    if(numNB == 3 ) {
+    String room4 = "  ";
+    System.out.println("Num rooms " + numNB);
+    if(numNB == 4 ) {
       room4 = neighbors[3].getName();
+      room4 = "Move to " + room4;
     }
 
-      bRoom4.setText("Move to " + room4);
-      bPane.add(bRoom4, new Integer(2));
+    bRoom4.setText(room4);
+    bPane.add(bRoom4, new Integer(2));
 
   }
 

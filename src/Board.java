@@ -17,6 +17,7 @@ class Board {
    private int numberOfPlayers;
    private int sceneCount;
    private Player currPlayer;
+   Boolean endClick;
    String input;
 
    Player[] players = new Player[maxPlayers];
@@ -30,6 +31,7 @@ class Board {
    public Board (int numPlayers) {
       deck.shuffle();
       numberOfPlayers = numPlayers;
+      endClick = false;
       createPlayers(numPlayers);
       createSets();
       if(numPlayers > 3) {
@@ -93,7 +95,7 @@ class Board {
         currPlayer = players[i];
         System.out.println("It is the " + currPlayer.getName() + " player's turn.");
         input = " ";
-        while(!(input.equals("end"))) {
+        while(!(input.equals("end")) &&  endClick == false) {
           System.out.print(">");
             System.out.println(input);
           Scanner scanner = new Scanner(System.in);
