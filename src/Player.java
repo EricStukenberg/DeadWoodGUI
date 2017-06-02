@@ -76,7 +76,7 @@ public class Player {
     Set[] adjacentRooms = location.getAdjacentRooms();
     int i = 0;
     boolean moved = false;
-    while(adjacentRooms[i] != null) {
+    while(adjacentRooms[i] != null && i < 3) {
       if(moveTo.equals(adjacentRooms[i].getName())) {
         location = adjacentRooms[i];
         moved = true;

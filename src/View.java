@@ -1,6 +1,3 @@
-
-
-
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.ImageIcon;
@@ -333,6 +330,10 @@ public class View extends JFrame {
     Set[] neighbors = location.getAdjacentRooms();
     int numNB = 0;
     while(neighbors[numNB] != null) {
+      System.out.println("Num rooms " + numNB);
+      if(numNB == 3) {
+        break;
+      }
       numNB++;
     }
     String room1 = neighbors[0].getName();
@@ -345,11 +346,14 @@ public class View extends JFrame {
     bRoom3.setText("Move to " + room3);
     bPane.add(bRoom3, new Integer(2));
 
-    if(numNB == 4 ) {
-      String room4 = neighbors[3].getName();
+    String room4 = "    ";
+    if(numNB == 3 ) {
+      room4 = neighbors[3].getName();
+    }
+
       bRoom4.setText("Move to " + room4);
       bPane.add(bRoom4, new Integer(2));
-    }
+
   }
 
 }
