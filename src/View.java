@@ -70,9 +70,9 @@ public class View extends JFrame {
       sets[i] = new Viewset(i, model);
       // Add the cards to the lower layer
       bPane.add(sets[i].cardlabel, new Integer(1));
-      // for (int j = 0; j < sets[i].takeCount; j++) {
-      //   bPane.add(sets[i].shotlabels[j], new Integer(1));
-      // }
+      for (int j = 0; j < sets[i].takeCount; j++) {
+        bPane.add(sets[i].shotlabels[j], new Integer(1));
+      }
 
     }
 
