@@ -17,6 +17,7 @@ class Board {
    private int numberOfPlayers;
    private int sceneCount;
    private Player currPlayer;
+   String input;
 
    Player[] players = new Player[maxPlayers];
    Set[] sets = new Set[10];
@@ -91,13 +92,16 @@ class Board {
       for(int i = 0; i < numberOfPlayers; i++) {
         currPlayer = players[i];
         System.out.println("It is the " + currPlayer.getName() + " player's turn.");
-        String input;
         input = " ";
         while(!(input.equals("end"))) {
           System.out.print(">");
+            System.out.println(input);
           Scanner scanner = new Scanner(System.in);
           input = scanner.nextLine();
-          readUserInput(input, currPlayer);
+          if(readUserInput(input, currPlayer) == false) {
+            input = "end";
+            System.out.println(input);
+          }
         }
         currPlayer.canMove = true;
         currPlayer.canAct = true;
@@ -107,7 +111,7 @@ class Board {
 
 
    // begin game helper function
-   private boolean readUserInput(String input, Player currPlayer) {
+   public boolean readUserInput(String input, Player currPlayer) {
      String[] words = new String[3];
      words = input.split("\\s+");
      int len = words.length;
@@ -133,6 +137,10 @@ class Board {
        rehearse(currPlayer);
      } else if(words[0].equals("act") && currPlayer.canAct) {
        act(currPlayer);
+     } else if(input.equals("end")) {
+       input = "end";
+       System.out.println("End turn is Selected should return flase");
+       return false;
      }
 
      return true;

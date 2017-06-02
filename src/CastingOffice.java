@@ -2,11 +2,15 @@ public class CastingOffice extends Set {
 
   private String name;
   private int[][] upgradePrices = new int[5][2];
+  private int xCord;
+  private int yCord;
 
   // Default constructor
   public CastingOffice() {
     super("Casting Office");
     name = "Casting Office";
+    xCord = 9;
+    yCord = 459;
     createPriceTable();
   }
 
@@ -34,5 +38,12 @@ public class CastingOffice extends Set {
       crd += 5;
       dlrAddVal += 2;
     }
+  }
+  public int getX() {
+    return xCord;
+  }
+
+  public int getY() {
+    return yCord;
   }
 }
