@@ -43,7 +43,7 @@ public class Deadwood {
       System.out.print("How many people will play the game? ");
          Scanner scanner = new Scanner(System.in);
          numPlayers = scanner.nextInt();
-         if(numPlayers > 1 && numPlayers < 8) {
+         if(numPlayers > 1 && numPlayers <= 8) {
             correct = true;
          } else {
             System.out.println("\nToo few or too many players, 2 to 8 players only.");
@@ -60,4 +60,5 @@ public class Deadwood {
     model.startGame();
 
   }
+
 }

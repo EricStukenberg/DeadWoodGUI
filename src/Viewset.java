@@ -6,7 +6,6 @@ import javax.swing.*;
 import javax.swing.ImageIcon;
 import javax.imageio.ImageIO;
 import java.awt.event.*;
-import org.w3c.dom.Element;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
@@ -56,9 +55,9 @@ public class Viewset extends JFrame {
       shotlabels[j] = new JLabel();
       shotlabels[j].setIcon(sIcon);
       takes[j] = (Element) set.getElementsByTagName("takes").item(j);
-      Element takeArea = (Element) takes[j].getElementsByTagName("area");
-      shotlabels[j].setBounds(Integer.parseInt(takeArea.getAttribute("x")),Integer.parseInt(takeArea.getAttribute("y")),46,46);
-      shotlabels[j].setOpaque(true);
+    //  Element takeArea = (Element) takes[j].getElementsByTagName("area");
+      //shotlabels[j].setBounds(Integer.parseInt(takeArea.getAttribute("x")),Integer.parseInt(takeArea.getAttribute("y")),46,46);
+    //  shotlabels[j].setOpaque(true);
 
     }
   }

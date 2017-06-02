@@ -16,6 +16,7 @@ class Board {
    private int days;
    private int numberOfPlayers;
    private int sceneCount;
+   private Player currPlayer;
 
    Player[] players = new Player[maxPlayers];
    Set[] sets = new Set[10];
@@ -88,7 +89,7 @@ class Board {
      while(true) {
 
       for(int i = 0; i < numberOfPlayers; i++) {
-        Player currPlayer = players[i];
+        currPlayer = players[i];
         System.out.println("It is the " + currPlayer.getName() + " player's turn.");
         String input;
         input = " ";
@@ -414,16 +415,16 @@ class Board {
 
    // creates all the sets
    private void createSets() {
-     sets[0] = new Set("Main Street", 3, 4);
-     sets[1] = new Set("Saloon", 2, 2);
-     sets[2] = new Set("Ranch", 2, 3);
-     sets[3] = new Set("Secret Hideout", 3, 4);
-     sets[4] = new Set("Bank", 1, 2);
-     sets[5] = new Set("Hotel", 3, 4);
-     sets[6] = new Set("Church", 2, 2);
-     sets[7] = new Set("Train Station", 3, 4);
-     sets[8] = new Set("Jail", 1, 2);
-     sets[9] = new Set("General Store", 2, 2);
+     sets[0] = new Set("Main Street", 3, 4, 969, 28);
+     sets[1] = new Set("Saloon", 2, 2, 632, 280);
+     sets[2] = new Set("Ranch", 2, 3, 252, 478);
+     sets[3] = new Set("Secret Hideout", 3, 4, 27, 732);
+     sets[4] = new Set("Bank", 1, 2, 623, 475);
+     sets[5] = new Set("Hotel", 3, 4, 969, 740);
+     sets[6] = new Set("Church", 2, 2, 623, 734);
+     sets[7] = new Set("Train Station", 3, 4, 21, 69);
+     sets[8] = new Set("Jail", 1, 2, 281, 27);
+     sets[9] = new Set("General Store", 2, 2, 370, 282);
      sceneCount = 10;
      createBoardLayout();
 
@@ -489,5 +490,9 @@ class Board {
      catch(FileNotFoundException exception) {
          System.out.println("The file " + file.getPath() + " doesn't exit.");
      }
+   }
+
+   public int getNumberOfPlayers() {
+     return numberOfPlayers;
    }
 }

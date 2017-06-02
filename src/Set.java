@@ -12,15 +12,20 @@ public class Set {
   private Scene scenecard;
   private Set[] adjacentRooms = new Set[4];
   private int numofRoles;
+  private int xCord;
+  private int yCord;
+
 
   // Default constructor
   public Set (String setName) {
     name = setName;
   }
-  public Set (String setName, int s, int n) {
+  public Set (String setName, int s, int n, int x, int y) {
     name = setName;
     shots = s;
     numofRoles = n;
+    xCord = x;
+    yCord = y;
     for (int i = 0; i < 4; i++) {
       offCardRoles[i] = new Role();
       offCardRoles[i].setName("Temp");
@@ -86,6 +91,14 @@ public class Set {
 
   public Role getRole(int n) {
     return offCardRoles[n];
+  }
+
+  public int getX() {
+    return xCord;
+  }
+
+  public int getY() {
+    return yCord;
   }
 
   public int countActiveRoles() {

@@ -21,8 +21,11 @@ public class View extends JFrame {
   JLabel boardlabel;
   JLabel cardlabel[];
   JLabel card2label;
-  JLabel player1label;
+  JLabel playerlabel[];
   JLabel player2label;
+  JLabel player3label;
+  JLabel player4label;
+
   JLabel mLabel;
 
   //JButtons
@@ -30,14 +33,12 @@ public class View extends JFrame {
   JButton bRehearse;
   JButton bMove;
   Viewset sets[];
-
   // JLayered Pane
   JLayeredPane bPane;
 
   // Constructor
 
   public View(Board model) {
-
     // Set the title of the JFrame
     super("Deadwood");
     // Set the exit option for the JFrame
@@ -74,22 +75,25 @@ public class View extends JFrame {
 
     }
 
-
-
-
+    int numPlayers = model.getNumberOfPlayers();
+    playerlabel = new JLabel[numPlayers];
+    for(int j = 0; j < numPlayers; j++) {
+      playerlabel[j] = new JLabel();
+    }
+    showPlayers(numPlayers, model);
     // Add a dice to represent a player.
     // Role for Crusty the prospector. The x and y co-ordiantes are taken from Board.xml file
-    player1label = new JLabel();
-    player2label = new JLabel();
-    ImageIcon p1Icon = new ImageIcon("../resources/r1.png");
-    ImageIcon p2Icon = new ImageIcon("../resources/b1.png");
-    player1label.setIcon(p1Icon);
-    player2label.setIcon(p2Icon);
+    //player1label = new JLabel();
+    //player2label = new JLabel();
+    //ImageIcon p1Icon = new ImageIcon("../resources/r1.png");
+  //  ImageIcon p2Icon = new ImageIcon("../resources/b1.png");
+  //  player1label.setIcon(p1Icon);
+  //  player2label.setIcon(p2Icon);
     //playerlabel.setBounds(114,227,pIcon.getIconWidth(),pIcon.getIconHeight());
-    player1label.setBounds(991,248,194,201);
-    player2label.setBounds(981,248,194,201);
-    bPane.add(player1label,new Integer(3));
-    bPane.add(player2label,new Integer(3));
+  //  player1label.setBounds(991,248,194,201);
+  //  player2label.setBounds(981,248,194,201);
+  //  bPane.add(player1label,new Integer(3));
+  //  bPane.add(player2label,new Integer(3));
 
     // Create the Menu for action buttons
     mLabel = new JLabel("MENU");
@@ -107,9 +111,9 @@ public class View extends JFrame {
     bRehearse.setBounds(icon.getIconWidth()+10,60,100, 20);
     bRehearse.addMouseListener(new boardMouseListener());
 
-    bMove = new JButton("MOVE");
+    bMove = new JButton("MOVE ROOMS");
     bMove.setBackground(Color.white);
-    bMove.setBounds(icon.getIconWidth()+10,90,100, 20);
+    bMove.setBounds(icon.getIconWidth()+10,90,150, 20);
     bMove.addMouseListener(new boardMouseListener());
 
 
@@ -144,6 +148,26 @@ public class View extends JFrame {
     }
     public void mouseExited(MouseEvent e) {
     }
+   }
+
+   public void showPlayers(int numPlayers, Board model) {
+     Player[] thePlayers = model.players;
+     int offSet = 5;
+     for(int i = 0; i < numPlayers; i++) {
+       Player currPlayer = thePlayers[i];
+       int rank = currPlayer.getRank();
+       Set location = currPlayer.getLocation();
+       int x = location.getX() + offSet;
+       int y = location.getY();
+       String firstLetter = currPlayer.getName();
+       firstLetter = firstLetter.substring(0,1);
+       System.out.println(firstLetter);
+       ImageIcon p1Icon = new ImageIcon("../resources/"+ firstLetter + rank +".png");
+       playerlabel[i].setIcon(p1Icon);
+       playerlabel[i].setBounds(x,y,194,201);
+       bPane.add(playerlabel[i],new Integer(3));
+       offSet = offSet + 20;
+     }
    }
 
 }
