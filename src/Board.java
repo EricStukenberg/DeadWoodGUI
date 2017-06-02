@@ -411,6 +411,7 @@ class Board {
            }
          }
       }
+      currPlayer = players[0];
    }
 
    // creates all the sets
@@ -495,4 +496,8 @@ class Board {
    public int getNumberOfPlayers() {
      return numberOfPlayers;
    }
+
+  public Player getCurrPlayer() {
+    return currPlayer;
+  }
 }

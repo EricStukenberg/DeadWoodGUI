@@ -22,16 +22,17 @@ public class View extends JFrame {
   JLabel cardlabel[];
   JLabel card2label;
   JLabel playerlabel[];
-  JLabel player2label;
-  JLabel player3label;
-  JLabel player4label;
+
 
   JLabel mLabel;
 
   //JButtons
   JButton bAct;
   JButton bRehearse;
-  JButton bMove;
+  JButton bRoom1;
+  JButton bRoom2;
+  JButton bRoom3;
+  JButton bRoom4;
   Viewset sets[];
   // JLayered Pane
   JLayeredPane bPane;
@@ -75,27 +76,18 @@ public class View extends JFrame {
 
     }
 
+
     int numPlayers = model.getNumberOfPlayers();
     playerlabel = new JLabel[numPlayers];
     for(int j = 0; j < numPlayers; j++) {
       playerlabel[j] = new JLabel();
     }
     showPlayers(numPlayers, model);
-    // Add a dice to represent a player.
-    // Role for Crusty the prospector. The x and y co-ordiantes are taken from Board.xml file
-    //player1label = new JLabel();
-    //player2label = new JLabel();
-    //ImageIcon p1Icon = new ImageIcon("../resources/r1.png");
-  //  ImageIcon p2Icon = new ImageIcon("../resources/b1.png");
-  //  player1label.setIcon(p1Icon);
-  //  player2label.setIcon(p2Icon);
-    //playerlabel.setBounds(114,227,pIcon.getIconWidth(),pIcon.getIconHeight());
-  //  player1label.setBounds(991,248,194,201);
-  //  player2label.setBounds(981,248,194,201);
-  //  bPane.add(player1label,new Integer(3));
-  //  bPane.add(player2label,new Integer(3));
+
+
 
     // Create the Menu for action buttons
+
     mLabel = new JLabel("MENU");
     mLabel.setBounds(icon.getIconWidth()+40,0,100,20);
     bPane.add(mLabel,new Integer(2));
@@ -104,41 +96,101 @@ public class View extends JFrame {
     bAct = new JButton("ACT");
     bAct.setBackground(Color.white);
     bAct.setBounds(icon.getIconWidth()+10, 30,100, 20);
-    bAct.addMouseListener(new boardMouseListener());
+    bAct.addMouseListener(new boardMouseListener(model));
+    bPane.add(bAct, new Integer(2));
+
 
     bRehearse = new JButton("REHEARSE");
     bRehearse.setBackground(Color.white);
-    bRehearse.setBounds(icon.getIconWidth()+10,60,100, 20);
-    bRehearse.addMouseListener(new boardMouseListener());
-
-    bMove = new JButton("MOVE ROOMS");
-    bMove.setBackground(Color.white);
-    bMove.setBounds(icon.getIconWidth()+10,90,150, 20);
-    bMove.addMouseListener(new boardMouseListener());
-
-
-    // Place the action buttons in the top layer
-    bPane.add(bAct, new Integer(2));
+    bRehearse.setBounds(icon.getIconWidth()+10,60,150, 20);
+    bRehearse.addMouseListener(new boardMouseListener(model));
     bPane.add(bRehearse, new Integer(2));
-    bPane.add(bMove, new Integer(2));
+
+    Player player = model.getCurrPlayer();
+    Set location = player.getLocation();
+    Set[] nieghbors = location.getAdjacentRooms();
+    int numNB = 0;
+    while(nieghbors[numNB] != null) {
+      numNB++;
+    }
+    String room1 = nieghbors[0].getName();
+    String room2 = nieghbors[1].getName();
+    String room3 = nieghbors[2].getName();
+
+
+    bRoom1 = new JButton("Move to " + room1);
+    bRoom1.setBackground(Color.white);
+    bRoom1.setBounds(icon.getIconWidth()+10,90,185, 20);
+    bPane.add(bRoom1, new Integer(2));
+    bRoom1.addMouseListener(new boardMouseListener(model));
+
+    bRoom2 = new JButton("Move to " + room2);
+    bRoom2.setBackground(Color.white);
+    bRoom2.setBounds(icon.getIconWidth()+10,120,185, 20);
+    bPane.add(bRoom2, new Integer(2));
+    bRoom2.addMouseListener(new boardMouseListener(model));
+
+    bRoom3 = new JButton("Move to " + room3);
+    bRoom3.setBackground(Color.white);
+    bRoom3.setBounds(icon.getIconWidth()+10,150,185, 20);
+    bPane.add(bRoom3, new Integer(2));
+    bRoom3.addMouseListener(new boardMouseListener(model));
+
+    if(numNB == 4) {
+      String room4 = nieghbors[3].getName();
+      bRoom4 = new JButton("Move to " + room4);
+      bRoom4.setBackground(Color.white);
+      bRoom4.setBounds(icon.getIconWidth()+10,180,185, 20);
+      bPane.add(bRoom3, new Integer(2));
+      bRoom4.addMouseListener(new boardMouseListener(model));
+    }
+
+
+    // Plac
   }
 
   //Controller stuff needs to be moveed
 
   class boardMouseListener implements MouseListener{
-
+    public Board model1;
+    public boardMouseListener(Board model) {
+      model1 = model;
+    }
     // Code for the different button clicks
     public void mouseClicked(MouseEvent e) {
 
+      Player currPlayer = model1.getCurrPlayer();
+      Set[] rooms = currPlayer.getLocation().getAdjacentRooms();
        if (e.getSource()== bAct){
           System.out.println("Acting is Selected\n");
-       }
-       else if (e.getSource()== bRehearse){
+       }else if (e.getSource()== bRehearse){
           System.out.println("Rehearse is Selected\n");
+
+       } else if (e.getSource()== bRoom1){
+          String roomName = rooms[0].getName();
+          currPlayer.move(roomName);
+          showPlayers(model1.getNumberOfPlayers(), model1);
+
+       } else if (e.getSource()== bRoom2){
+         String roomName = rooms[1].getName();
+         System.out.println("Selected Move to "  + roomName);
+         currPlayer.move(roomName);
+         showPlayers(model1.getNumberOfPlayers(), model1);
+
+       } else if (e.getSource()== bRoom3){
+         String roomName = rooms[2].getName();
+         System.out.println("Selected Move to "  + roomName);
+         currPlayer.move(roomName);
+         showPlayers(model1.getNumberOfPlayers(), model1);
+
+       } else if (e.getSource()== bRoom4){
+         String roomName = rooms[3].getName();
+         System.out.println("Selected Move to "  + roomName);
+         currPlayer.move(roomName);
+         showPlayers(model1.getNumberOfPlayers(), model1);
+
        }
-       else if (e.getSource()== bMove){
-          System.out.println("Move is Selected\n");
-       }
+
     }
     public void mousePressed(MouseEvent e) {
     }
