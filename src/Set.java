@@ -28,7 +28,7 @@ public class Set {
     yCord = y;
     for (int i = 0; i < 4; i++) {
       offCardRoles[i] = new Role();
-      offCardRoles[i].setName("Temp");
+      //offCardRoles[i].setName("Temp");
     }
   }
 

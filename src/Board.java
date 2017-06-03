@@ -16,7 +16,7 @@ class Board {
    private int days;
    private int numberOfPlayers;
    private int sceneCount;
-   private Player currPlayer;
+   public Player currPlayer;
    Boolean endClick;
    String input;
 
@@ -93,17 +93,20 @@ class Board {
 
       for(int i = 0; i < numberOfPlayers; i++) {
         currPlayer = players[i];
+        Scanner scanner = new Scanner(System.in);
         System.out.println("It is the " + currPlayer.getName() + " player's turn.");
-        input = " ";
-        while(!(input.equals("end")) &&  endClick == false) {
-          System.out.print(">");
-            System.out.println(input);
-          Scanner scanner = new Scanner(System.in);
-          input = scanner.nextLine();
-          if(readUserInput(input, currPlayer) == false) {
-            input = "end";
-            System.out.println(input);
+        input = "1";
+        while(input != "end" && !endClick) {
+          //System.out.print(">");
+          // if (scanner.Next() != \n) {
+          //   //input = scanner.nextLine();
+          // }
+          //System.out.println(input);
+          if(readUserInput(currPlayer) == false) {
+            System.out.println("breaking");
+            break;
           }
+          //input = "1";
         }
         currPlayer.canMove = true;
         currPlayer.canAct = true;
@@ -113,7 +116,7 @@ class Board {
 
 
    // begin game helper function
-   public boolean readUserInput(String input, Player currPlayer) {
+   public boolean readUserInput(Player currPlayer) {
      String[] words = new String[3];
      words = input.split("\\s+");
      int len = words.length;
@@ -140,11 +143,10 @@ class Board {
      } else if(words[0].equals("act") && currPlayer.canAct) {
        act(currPlayer);
      } else if(input.equals("end")) {
-       input = "end";
-       System.out.println("End turn is Selected should return flase");
+       System.out.println("End turn is Selected should return false");
        return false;
      }
-
+     input = "1";
      return true;
     }
 
