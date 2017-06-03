@@ -8,6 +8,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 
 
 public class View extends JFrame {
@@ -113,13 +115,19 @@ public class View extends JFrame {
           System.out.println("Rehearse is Selected\n");
 
        }else if (e.getSource()== bEnd){
-             System.out.println("End turn is Selected\n");
-             model.endClick = true;
-             model.readUserInput("end", currPlayer);
+             //System.out.println("End turn is Selected\n");
+             model.endClick = false;
+             model.currPlayer = currPlayer;
+             model.input = "end";
+             currPlayer = model.getCurrPlayer();
+             updateButtons();
+             //model.readUserInput("end", currPlayer);
 
        } else if (e.getSource()== bRoom1){
           String roomName = rooms[0].getName();
-          model.readUserInput("move " + roomName, currPlayer);
+          // model.readUserInput("move " + roomName, currPlayer);
+          model.currPlayer = currPlayer;
+          model.input = "move " + roomName;
           moved = true;
           String newLoc = currPlayer.getLocation().getName();
           System.out.println("The player moved to " + newLoc);
@@ -131,6 +139,8 @@ public class View extends JFrame {
            String roomName = rooms[1].getName();
            System.out.println("Selected Move to "  + roomName);
            currPlayer.move(roomName);
+           model.currPlayer = currPlayer;
+           model.input = "move " + roomName;
            moved = true;
            showPlayers(model.getNumberOfPlayers(), model);
            updateButtons();
@@ -140,6 +150,8 @@ public class View extends JFrame {
            String roomName = rooms[2].getName();
            System.out.println("Selected Move to "  + roomName);
            currPlayer.move(roomName);
+           model.currPlayer = currPlayer;
+           model.input = "move " + roomName;
            moved = true;
            showPlayers(model.getNumberOfPlayers(), model);
            updateButtons();

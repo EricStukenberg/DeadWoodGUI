@@ -30,7 +30,7 @@ public class Set {
 
     for (int i = 0; i < numofRoles; i++) {
       offCardRoles[i] = new Role();
-      offCardRoles[i].setName("Temp");
+      //offCardRoles[i].setName("Temp");
     }
   }
   public void setRoles(String name, String line, int rank){
