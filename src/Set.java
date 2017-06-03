@@ -7,7 +7,7 @@
 public class Set {
 
   private String name;
-  private Role[] offCardRoles = new Role[4];
+  private Role[] offCardRoles;
   private int shots;
   private Scene scenecard;
   private Set[] adjacentRooms = new Set[4];
@@ -26,12 +26,18 @@ public class Set {
     numofRoles = n;
     xCord = x;
     yCord = y;
-    for (int i = 0; i < 4; i++) {
+    offCardRoles = new Role[numofRoles];
+
+    for (int i = 0; i < numofRoles; i++) {
       offCardRoles[i] = new Role();
       offCardRoles[i].setName("Temp");
     }
   }
-
+  public void setRoles(String name, String line, int rank){
+    for (int i = 0; i < numofRoles; i++) {
+      offCardRoles[i] = new Role();
+    }
+  }
   // Returns name
 	public String getName() {
 		return name;

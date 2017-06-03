@@ -95,7 +95,8 @@ class Board {
         currPlayer = players[i];
         System.out.println("It is the " + currPlayer.getName() + " player's turn.");
         input = " ";
-        while(!(input.equals("end")) &&  endClick == false) {
+        endClick = false;
+        while(endClick == false) {
           System.out.print(">");
             System.out.println(input);
           Scanner scanner = new Scanner(System.in);
@@ -426,16 +427,16 @@ class Board {
 
    // creates all the sets
    private void createSets() {
-     sets[0] = new Set("Main Street", 3, 4, 969, 28);
-     sets[1] = new Set("Saloon", 2, 2, 632, 280);
-     sets[2] = new Set("Ranch", 2, 3, 252, 478);
-     sets[3] = new Set("Secret Hideout", 3, 4, 27, 732);
-     sets[4] = new Set("Bank", 1, 2, 623, 475);
-     sets[5] = new Set("Hotel", 3, 4, 969, 740);
-     sets[6] = new Set("Church", 2, 2, 623, 734);
-     sets[7] = new Set("Train Station", 3, 4, 21, 69);
-     sets[8] = new Set("Jail", 1, 2, 281, 27);
-     sets[9] = new Set("General Store", 2, 2, 370, 282);
+     sets[0] = new Set("Main Street", 3, 4, 950, 80);
+     sets[1] = new Set("Saloon", 2, 2, 632, 320);
+     sets[2] = new Set("Ranch", 2, 3, 270, 560);
+     sets[3] = new Set("Secret Hideout", 3, 4, 240, 760);
+     sets[4] = new Set("Bank", 1, 2, 623, 515);
+     sets[5] = new Set("Hotel", 3, 4, 969, 775);
+     sets[6] = new Set("Church", 2, 2, 623, 775);
+     sets[7] = new Set("Train Station", 3, 4, 15, 120);
+     sets[8] = new Set("Jail", 1, 2, 281, 80);
+     sets[9] = new Set("General Store", 2, 2, 370, 330);
      sceneCount = 10;
      createBoardLayout();
 
@@ -461,7 +462,7 @@ class Board {
       sets[1].setAdjacentRooms(sets[0], trailers, sets[4], sets[9]);
       sets[2].setAdjacentRooms(casting_office, sets[9], sets[4], sets[3]);
       sets[3].setAdjacentRooms(casting_office, sets[2], sets[6], null);
-      sets[4].setAdjacentRooms(sets[3], sets[6], sets[5], sets[1]);
+      sets[4].setAdjacentRooms(sets[2], sets[6], sets[5], sets[1]);
       sets[5].setAdjacentRooms(sets[6], trailers, sets[4], null);
       sets[6].setAdjacentRooms(sets[5], sets[3], sets[4], null);
       sets[7].setAdjacentRooms(casting_office, sets[8], sets[9], null);
@@ -489,11 +490,10 @@ class Board {
 
          for (int i = 0; i < sets[count].getNumofRoles(); i++) {
            sets[count].getRole(i).setName(scan.next());
-           //System.out.println(scenes.get(count).roles[i].getName());
+
            sets[count].getRole(i).setRank(scan.nextInt());
-           //System.out.println(scenes.get(count).roles[i].getRank());
+
            sets[count].getRole(i).setLine(scan.next());
-           //System.out.println(scenes.get(count).roles[i].getLine());
          }
          count++;
        }

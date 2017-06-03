@@ -20,6 +20,7 @@ public class View extends JFrame {
   JLabel card2label;
   JLabel playerlabel[];
   JLabel playerInfo;
+  JLabel lRoles;
 
 
   JLabel mLabel;
@@ -32,11 +33,18 @@ public class View extends JFrame {
   JButton bRoom2;
   JButton bRoom3;
   JButton bRoom4;
+
+  JButton bRole1;
+  JButton bRole2;
+  JButton bRole3;
+  JButton bRole4;
+
   Boolean bR4Created;
   Viewset sets[];
   ImageIcon icon;
   Board model;
   boolean moved;
+  Boolean bRolesCreated;
   // JLayered Pane
   JLayeredPane bPane;
 
@@ -47,6 +55,7 @@ public class View extends JFrame {
     super("Deadwood");
     model = model1;
     bR4Created = false;
+    bRolesCreated = false;
 
     // Set the exit option for the JFrame
     setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -85,74 +94,6 @@ public class View extends JFrame {
     }
 
     buttons();
-
-/*    int numPlayers = model.getNumberOfPlayers();
-    playerlabel = new JLabel[numPlayers];
-    for(int j = 0; j < numPlayers; j++) {
-      playerlabel[j] = new JLabel();
-    }
-    showPlayers(numPlayers, model);
-
-
-
-    // Create the Menu for action buttons
-
-    mLabel = new JLabel("MENU");
-    mLabel.setBounds(icon.getIconWidth()+40,0,100,20);
-    bPane.add(mLabel,new Integer(2));
-
-    // Create Action buttons
-    bAct = new JButton("ACT");
-    bAct.setBackground(Color.white);
-    bAct.setBounds(icon.getIconWidth()+10, 30,100, 20);
-    bAct.addMouseListener(new boardMouseListener(model));
-    bPane.add(bAct, new Integer(2));
-
-
-    bRehearse = new JButton("REHEARSE");
-    bRehearse.setBackground(Color.white);
-    bRehearse.setBounds(icon.getIconWidth()+10,60,150, 20);
-    bRehearse.addMouseListener(new boardMouseListener(model));
-    bPane.add(bRehearse, new Integer(2));
-
-    Player player = model.getCurrPlayer();
-    Set location = player.getLocation();
-    Set[] neighbors = location.getAdjacentRooms();
-    int numNB = 0;
-    while(neighbors[numNB] != null) {
-      numNB++;
-    }
-    String room1 = neighbors[0].getName();
-    String room2 = neighbors[1].getName();
-    String room3 = neighbors[2].getName();
-
-
-    bRoom1 = new JButton("Move to " + room1);
-    bRoom1.setBackground(Color.white);
-    bRoom1.setBounds(icon.getIconWidth()+10,90,185, 20);
-    bPane.add(bRoom1, new Integer(2));
-    bRoom1.addMouseListener(new boardMouseListener(model));
-
-    bRoom2 = new JButton("Move to " + room2);
-    bRoom2.setBackground(Color.white);
-    bRoom2.setBounds(icon.getIconWidth()+10,120,185, 20);
-    bPane.add(bRoom2, new Integer(2));
-    bRoom2.addMouseListener(new boardMouseListener(model));
-
-    bRoom3 = new JButton("Move to " + room3);
-    bRoom3.setBackground(Color.white);
-    bRoom3.setBounds(icon.getIconWidth()+10,150,185, 20);
-    bPane.add(bRoom3, new Integer(2));
-    bRoom3.addMouseListener(new boardMouseListener(model));
-
-    if(numNB == 4) {
-      String room4 = neighbors[3].getName();
-      bRoom4 = new JButton("Move to " + room4);
-      bRoom4.setBackground(Color.white);
-      bRoom4.setBounds(icon.getIconWidth()+10,180,185, 20);
-      bPane.add(bRoom3, new Integer(2));
-      bRoom4.addMouseListener(new boardMouseListener(model));
-    } */
 
   }
 
@@ -364,6 +305,53 @@ public class View extends JFrame {
 
     bRoom4.setText(room4);
     bPane.add(bRoom4, new Integer(2));
+
+    if(location.getRole(0) != null) {
+      if(bRolesCreated == false) {
+        bRolesCreated = true;
+
+        int numRoles = location.getNumofRoles();
+
+        Role role1 = location.getRole(0);
+        String roleName1 = role1.getName();
+        bRole1 = new JButton("Take " + roleName1);
+        bRole1.setBackground(Color.white);
+        bRole1.setBounds(icon.getIconWidth()+10,240,200, 20);
+        bPane.add(bRole1, new Integer(2));
+        bRole1.addMouseListener(new boardMouseListener());
+
+        Role role2 = location.getRole(1);
+        String roleName2 = role2.getName();
+        bRole1 = new JButton("Take " + roleName2);
+        bRole1.setBackground(Color.white);
+        bRole1.setBounds(icon.getIconWidth()+230,240, 200, 20);
+        bPane.add(bRole1, new Integer(2));
+        bRole1.addMouseListener(new boardMouseListener());
+
+        if(numRoles > 2) {
+          Role role3 = location.getRole(2);
+          String roleName3 = role3.getName();
+          bRoom3 = new JButton("Take " + roleName3);
+          bRoom3.setBackground(Color.white);
+          bRoom3.setBounds(icon.getIconWidth()+10,270,200, 20);
+          bPane.add(bRoom3, new Integer(2));
+          if(moved == false ) {
+            bRoom3.addMouseListener(new boardMouseListener());
+          }
+          if(numRoles > 2) {
+            Role role4 = location.getRole(3);
+            String roleName4 = role4.getName();
+            bRoom4 = new JButton("Take " + roleName4);
+            bRoom4.setBackground(Color.white);
+            bRoom4.setBounds(icon.getIconWidth()+230,270,200, 20);
+            bPane.add(bRoom4, new Integer(2));
+            bRoom4.addMouseListener(new boardMouseListener());
+          }
+        }
+      } else {
+        
+      }
+    }
 
   }
 
