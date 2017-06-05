@@ -20,7 +20,6 @@ import java.awt.event.*;
 
 public class Deadwood {
 
-  public Board gameBoard;
   private JFrame mainFrame;
 
   public static void main( String[] args ) {
