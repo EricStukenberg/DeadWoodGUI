@@ -151,17 +151,16 @@ class Board {
     }
 
     // who helper function
-    private void who(Player currPlayer) {
+    public String who(Player currPlayer) {
       Role currRole = currPlayer.getRole();
       String name = currPlayer.getName();
       int money = currPlayer.getMoney();
       int credits = currPlayer.getCredits();
       if(currRole == null) {
-        System.out.println(name + " ($" + money + ", " + credits + "cr) ");
+        return name + " ($" + money + ", " + credits + "cr) ";
       } else {
         currRole.getName();
-        System.out.println(name + " ($" + money + ", " + credits + "cr) " +
-        "working " + currRole.getName() + ", " + "\"" + currRole.getLine() + "\"");
+        return name + " ($" + money + ", " + credits + "cr) " + "working " + currRole.getName() + ", " + "\"" + currRole.getLine() + "\"";
       }
     }
 

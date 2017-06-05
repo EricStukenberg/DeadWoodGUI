@@ -50,6 +50,7 @@ public class View extends JFrame {
   boolean bRolesCreated;
   Boolean bRolesCreated1;
   Boolean bRolesCreated2;
+  Boolean playLabelCreated;
   // JLayered Pane
   JLayeredPane bPane;
 
@@ -63,6 +64,7 @@ public class View extends JFrame {
     bRolesCreated = false;
     bRolesCreated1 = false;
     bRolesCreated2 = false;
+    playLabelCreated = false;
 
     // Set the exit option for the JFrame
     setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -84,7 +86,7 @@ public class View extends JFrame {
     bPane.add(boardlabel, new Integer(0));
 
     // Set the size of the GUI
-    setSize(icon.getIconWidth()+200,icon.getIconHeight());
+    setSize(icon.getIconWidth()+600,icon.getIconHeight()+200);
 
     //Grab the images to be used on each set
     sets = new Viewset[10];
@@ -126,6 +128,8 @@ public class View extends JFrame {
              model.input = "end";
              currPlayer = model.getCurrPlayer();
              model = model;
+             showPlayers(model.getNumberOfPlayers(), model);
+             showPlayers(model.getNumberOfPlayers(), model);
              updateButtons();
              updateButtons(); // fixes bug
              //model.readUserInput("end", currPlayer);
@@ -178,6 +182,14 @@ public class View extends JFrame {
            moved = true;
            showPlayers(model.getNumberOfPlayers(), model);
            updateButtons();
+       } else if (e.getSource() == bRole1) {
+
+       } else if (e.getSource() == bRole2) {
+
+       }  else if (e.getSource() == bRole3) {
+
+       }  else if (e.getSource() == bRole4) {
+
        }
 
     }
@@ -191,11 +203,16 @@ public class View extends JFrame {
     }
    }
 
-   public void showPlayers(int numPlayers, Board model) {
+  public void showPlayers(int numPlayers, Board model) {
      Player[] thePlayers = model.players;
      int offSet = 5;
+     Player currPlayer = model.getCurrPlayer();
+     String playerName = currPlayer.getName();
+     String who = model.who(currPlayer);
+     showPlayerLabel( who, playerName);
+
      for(int i = 0; i < numPlayers; i++) {
-       Player currPlayer = thePlayers[i];
+       currPlayer = thePlayers[i];
        int rank = currPlayer.getRank();
        Set location = currPlayer.getLocation();
        int x = location.getX() + offSet;
@@ -208,7 +225,52 @@ public class View extends JFrame {
        bPane.add(playerlabel[i],new Integer(3));
        offSet = offSet + 20;
      }
-   }
+  }
+
+  public void showPlayerLabel(String who, String name) {
+    if(playLabelCreated == false) {
+      playLabelCreated = true;
+      playerInfo = new JLabel(who);
+    } else {
+      playerInfo.setText(who);
+    }
+    playerInfo.setBounds(icon.getIconWidth()+250,180,200,30);
+    String firstLetter = name.substring(0,1);
+    if(firstLetter.equals("b")) {
+      playerInfo.setForeground(Color.blue);
+      playerInfo.setFont(new Font("Courier New", Font.ITALIC, 24));
+      bPane.add(playerInfo,new Integer(2));
+    } else if (firstLetter.equals("c")) {
+      playerInfo.setForeground(Color.cyan);
+      playerInfo.setFont(new Font("Courier New", Font.ITALIC, 24));
+      bPane.add(playerInfo,new Integer(2));
+    } else if (firstLetter.equals("g")) {
+      playerInfo.setForeground(Color.green);
+      playerInfo.setFont(new Font("Courier New", Font.ITALIC, 24));
+      bPane.add(playerInfo,new Integer(2));
+    } else if (firstLetter.equals("o")) {
+      playerInfo.setForeground(Color.orange);
+      playerInfo.setFont(new Font("Courier New", Font.ITALIC, 24));
+      bPane.add(playerInfo,new Integer(2));
+    } else if (firstLetter.equals("p")) {
+      playerInfo.setForeground(Color.pink);
+      playerInfo.setFont(new Font("Courier New", Font.ITALIC, 24));
+      bPane.add(playerInfo,new Integer(2));
+    } else if (firstLetter.equals("r")) {
+      playerInfo.setForeground(Color.red);
+      playerInfo.setFont(new Font("Courier New", Font.ITALIC, 24));
+      bPane.add(playerInfo,new Integer(2));
+    } else if (firstLetter.equals("v")) {
+      Color color = new Color(148,0,211);
+      playerInfo.setForeground(color);
+      playerInfo.setFont(new Font("Courier New", Font.ITALIC, 24));
+      bPane.add(playerInfo,new Integer(2));
+    } else if (firstLetter.equals("y")) {
+      playerInfo.setForeground(Color.yellow);
+      playerInfo.setFont(new Font("Courier New", Font.ITALIC, 24));
+      bPane.add(playerInfo,new Integer(2));
+    }
+  }
 
 
    public void buttons() {
@@ -266,7 +328,7 @@ public class View extends JFrame {
      bRoom1.setBackground(Color.white);
      bRoom1.setBounds(icon.getIconWidth()+10,90,200, 20);
      bPane.add(bRoom1, new Integer(2));
-    bRoom1.addMouseListener(new boardMouseListener());
+     bRoom1.addMouseListener(new boardMouseListener());
 
 
      bRoom2 = new JButton("Move to " + room2);
@@ -327,6 +389,10 @@ public class View extends JFrame {
 
     bRoom4.setText(room4);
     bPane.add(bRoom4, new Integer(2));
+    updateRoleButtons(location, player);
+  }
+
+  public void updateRoleButtons(Set location, Player player) {
 
     if(!(location.getName().equals("Trailers")) && !(location.getName().equals("Casting Office"))) {
       if(bRolesCreated == false) {
