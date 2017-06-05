@@ -113,6 +113,11 @@ public class View extends JFrame {
 
       Player currPlayer = model.getCurrPlayer();
       Set[] rooms = currPlayer.getLocation().getAdjacentRooms();
+      int i = 0;
+      // while (rooms[i] != null) {
+      //   System.out.println(rooms[i].getName());
+      //   i++;
+      // }
        if (e.getSource()== bAct){
           System.out.println("Acting is Selected\n");
 
@@ -120,27 +125,15 @@ public class View extends JFrame {
           System.out.println("Rehearse is Selected\n");
 
        }else if (e.getSource()== bEnd){
-             //System.out.println("End turn is Selected\n");
-             model.endClick = false;
-             model.currPlayer = currPlayer;
-             model.input = "end";
+             model.endClick = true;
              currPlayer = model.getCurrPlayer();
-             model = model;
              updateButtons();
              updateButtons(); // fixes bug
-             //model.readUserInput("end", currPlayer);
 
        } else if (e.getSource()== bRoom1){
           String roomName = rooms[0].getName();
-          // model.readUserInput("move " + roomName, currPlayer);
-          model.currPlayer = currPlayer;
-          model.input = "move " + roomName;
           moved = true;
-
           currPlayer.move(roomName);
-          model.currPlayer = currPlayer;
-          moved = true;
-
           String newLoc = currPlayer.getLocation().getName();
           System.out.println("The player moved to " + newLoc);
           showPlayers(model.getNumberOfPlayers(), model);
@@ -149,33 +142,31 @@ public class View extends JFrame {
 
        } else if (e.getSource()== bRoom2){
            String roomName = rooms[1].getName();
-           System.out.println("Selected Move to "  + roomName);
-           currPlayer.move(roomName);
-           model.currPlayer = currPlayer;
-           model.input = "move " + roomName;
            moved = true;
+           currPlayer.move(roomName);
+           String newLoc = currPlayer.getLocation().getName();
+           System.out.println("The player moved to " + newLoc);
            showPlayers(model.getNumberOfPlayers(), model);
            updateButtons();
 
 
        } else if (e.getSource()== bRoom3){
            String roomName = rooms[2].getName();
-           System.out.println("Selected Move to "  + roomName);
-           currPlayer.move(roomName);
-           model.currPlayer = currPlayer;
-           model.input = "move " + roomName;
            moved = true;
+           currPlayer.move(roomName);
+           String newLoc = currPlayer.getLocation().getName();
+           System.out.println("The player moved to " + newLoc);
            showPlayers(model.getNumberOfPlayers(), model);
            updateButtons();
 
 
        } else if (e.getSource()== bRoom4){
            String roomName = rooms[3].getName();
-           System.out.println("Selected Move to "  + roomName);
-           currPlayer.move(roomName);
-           model.currPlayer = currPlayer;
-           model.input = "move " + roomName;
+           System.out.println("%%%%%% Moving to " + roomName);
            moved = true;
+           currPlayer.move(roomName);
+           String newLoc = currPlayer.getLocation().getName();
+           System.out.println("The player moved to " + newLoc);
            showPlayers(model.getNumberOfPlayers(), model);
            updateButtons();
        }
@@ -300,11 +291,12 @@ public class View extends JFrame {
   public void updateButtons() {
     Player player = model.getCurrPlayer();
     Set location = player.getLocation();
+    System.out.println("Updating at " + location.getName());
     Set[] neighbors = location.getAdjacentRooms();
     int numNB = 0;
     for(int i = 0; i < 4; i++) {
       if(neighbors[i] != null) {
-        System.out.println("Num rooms " + numNB);
+        //System.out.println("Num rooms " + numNB);
         numNB++;
       }
     }
