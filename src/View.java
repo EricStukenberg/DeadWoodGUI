@@ -166,14 +166,16 @@ public class View extends JFrame {
 
 
        } else if (e.getSource()== bRoom4){
-           String roomName = rooms[3].getName();
-           System.out.println("%%%%%% Moving to " + roomName);
-           moved = true;
-           currPlayer.move(roomName);
-           String newLoc = currPlayer.getLocation().getName();
-           System.out.println("The player moved to " + newLoc);
-           showPlayers(model.getNumberOfPlayers(), model);
-           updateButtons();
+          if(rooms[3] != null) {
+             String roomName = rooms[3].getName();
+             System.out.println("%%%%%% Moving to " + roomName);
+             moved = true;
+             currPlayer.move(roomName);
+             String newLoc = currPlayer.getLocation().getName();
+             System.out.println("The player moved to " + newLoc);
+             showPlayers(model.getNumberOfPlayers(), model);
+             updateButtons();
+          }
        } else if (e.getSource() == bRole1) {
 
        } else if (e.getSource() == bRole2) {
