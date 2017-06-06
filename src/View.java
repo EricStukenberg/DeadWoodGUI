@@ -55,7 +55,6 @@ public class View extends JFrame {
   JLayeredPane bPane;
 
   // Constructor
-
   public View(Board model1) {
     // Set the title of the JFrame
     super("Deadwood");
@@ -72,7 +71,6 @@ public class View extends JFrame {
     moved = false;
 
     // Create the JLayeredPane to hold the display, cards, role dice and buttons
-
     bPane = getLayeredPane();
     XMLParse xml = new XMLParse();
 
@@ -86,7 +84,7 @@ public class View extends JFrame {
     bPane.add(boardlabel, new Integer(0));
 
     // Set the size of the GUI
-    setSize(icon.getIconWidth()+600,icon.getIconHeight()+200);
+    setSize(icon.getIconWidth() + 600,icon.getIconHeight()+200);
 
     //Grab the images to be used on each set
     sets = new Viewset[10];
@@ -99,11 +97,8 @@ public class View extends JFrame {
       for (int j = 0; j < sets[i].takeCount; j++) {
         bPane.add(sets[i].shotlabels[j], new Integer(1));
       }
-
     }
-
     buttons();
-
   }
 
   //Controller stuff needs to be moveed
@@ -116,10 +111,7 @@ public class View extends JFrame {
       Player currPlayer = model.getCurrPlayer();
       Set[] rooms = currPlayer.getLocation().getAdjacentRooms();
       int i = 0;
-      // while (rooms[i] != null) {
-      //   System.out.println(rooms[i].getName());
-      //   i++;
-      // }
+
        if (e.getSource()== bAct){
           System.out.println("Acting is Selected\n");
 
@@ -139,6 +131,11 @@ public class View extends JFrame {
           String roomName = rooms[0].getName();
           moved = true;
           currPlayer.move(roomName);
+          for (int j = 0; i < 10; i++) {
+            if (sets[i].name.equals(roomName)) {
+              sets[i].visit(model);
+            }
+          }
           String newLoc = currPlayer.getLocation().getName();
           System.out.println("The player moved to " + newLoc);
           showPlayers(model.getNumberOfPlayers(), model);
@@ -149,6 +146,11 @@ public class View extends JFrame {
            String roomName = rooms[1].getName();
            moved = true;
            currPlayer.move(roomName);
+           for (int j = 0; i < 10; i++) {
+             if (sets[i].name.equals(roomName)) {
+               sets[i].visit(model);
+             }
+           }
            String newLoc = currPlayer.getLocation().getName();
            System.out.println("The player moved to " + newLoc);
            showPlayers(model.getNumberOfPlayers(), model);
@@ -159,6 +161,11 @@ public class View extends JFrame {
            String roomName = rooms[2].getName();
            moved = true;
            currPlayer.move(roomName);
+           for (int j = 0; i < 10; i++) {
+             if (sets[i].name.equals(roomName)) {
+               sets[i].visit(model);
+             }
+           }
            String newLoc = currPlayer.getLocation().getName();
            System.out.println("The player moved to " + newLoc);
            showPlayers(model.getNumberOfPlayers(), model);
@@ -171,6 +178,11 @@ public class View extends JFrame {
              System.out.println("%%%%%% Moving to " + roomName);
              moved = true;
              currPlayer.move(roomName);
+             for (int j = 0; i < 10; i++) {
+               if (sets[i].name.equals(roomName)) {
+                 sets[i].visit(model);
+               }
+             }
              String newLoc = currPlayer.getLocation().getName();
              System.out.println("The player moved to " + newLoc);
              showPlayers(model.getNumberOfPlayers(), model);
@@ -266,7 +278,6 @@ public class View extends JFrame {
     }
   }
 
-
    public void buttons() {
      if(model == null) {
        System.out.println("Error");
@@ -278,10 +289,7 @@ public class View extends JFrame {
      }
      showPlayers(numPlayers, model);
 
-
-
      // Create the Menu for action buttons
-
      mLabel = new JLabel("MENU");
      mLabel.setBounds(icon.getIconWidth()+40,5,200,20);
      Color customColor = new Color(153,76,2);
@@ -337,7 +345,6 @@ public class View extends JFrame {
      bPane.add(bRoom3, new Integer(2));
      bRoom3.addMouseListener(new boardMouseListener());
 
-     //String room4 = neighbors[3].getName();
      bRoom4 = new JButton(" ");
      bRoom4.setBackground(Color.white);
      bRoom4.setBounds(icon.getIconWidth()+10,180,200, 20);

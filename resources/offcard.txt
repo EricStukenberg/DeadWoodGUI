@@ -1,10 +1,10 @@
-Crusty Prospector/1/Aww, peaches!/Dragged by Train/1/Omgeezers!/Preacher with Bag/2/The Lord will provide./Cyrus the Gunfighter/4/Git to fightin' or git away!
-Clumsy Pit Fighter/1/Hit me!/Thug with Knife/2/Meet Suzy, my murderin' knife./Dangerous Tom/3/There's two ways we can do this..../Penny, who is lost/4/Oh, wow! for I am lost!/
-Dead Man/1/..../Crying Woman/2/Oh, the humanity!/
-Sleeping Drunkard/1/Zzzzzzz...Whiskey!/Faro Player/1/Hit me!/Falls from Balcony/2/Arrrgghh!/Australian Bartender/3/What'll it be, mate?
 Railroad Worker/1/Hit me!/Falls off Roof/2/Aaaaiiiigggghh!/Woman in Black Dress/2/Well, I'll be!/Mayor McGinty/4/People of Deadwood!/
+Reluctant Farmer/1/I ain't so sure about that!/Woman in Red Dress/2/Come up and see me!/
+Shot in Leg/1/Ow! Me Leg!/Saucy Fred/2/That's what she said./Man Under Horse/3/A little help here!/
+Clumsy Pit Fighter/1/Hit me!/Thug with Knife/2/Meet Suzy, my murderin' knife./Dangerous Tom/3/There's two ways we can do this..../Penny, who is lost/4/Oh, wow! for I am lost!/
+Suspicious Gentleman/2/Can you be more specific?/Flustered Teller/3/Would you like a large bill, sir?/
+Sleeping Drunkard/1/Zzzzzzz...Whiskey!/Faro Player/1/Hit me!/Falls from Balcony/2/Arrrgghh!/Australian Bartender/3/What'll it be, mate?
+Dead Man/1/..../Crying Woman/2/Oh, the humanity!/
+Crusty Prospector/1/Aww, peaches!/Dragged by Train/1/Omgeezers!/Preacher with Bag/2/The Lord will provide./Cyrus the Gunfighter/4/Git to fightin' or git away!
 Prisoner In Cell/2/Zzzzzzz...Whiskey!/Feller in Irons/3/Ah kilt the wrong man!/
 Man in Overalls/1/Looks like a storm's comin' in./Mister Keach/3/Howdy, stranger./
-Shot in Leg/1/Ow! Me Leg!/Saucy Fred/2/That's what she said./Man Under Horse/3/A little help here!/
-Suspicious Gentleman/2/Can you be more specific?/Flustered Teller/3/Would you like a large bill, sir?/
-Reluctant Farmer/1/I ain't so sure about that!/Woman in Red Dress/2/Come up and see me!/

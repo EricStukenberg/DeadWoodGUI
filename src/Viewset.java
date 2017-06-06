@@ -24,12 +24,16 @@ public class Viewset extends JFrame {
   public Element take;
   public Element set;
   public int takeCount;
+  public boolean visited;
+  public Scene scene;
+  private XMLParse xml;
 
 
   // Constructor
   public Viewset(int i, Board model) {
     name = model.sets[i].getName();
-    XMLParse xml = new XMLParse();
+    xml = new XMLParse();
+    visited = false;
 
     // Grab our intial image for the scene cards
     ImageIcon cIcon =  new ImageIcon("../resources/cardback.png");
@@ -59,5 +63,21 @@ public class Viewset extends JFrame {
       shotlabels[j].setBounds(Integer.parseInt(area.getAttribute("x")),Integer.parseInt(area.getAttribute("y")),46,46);
       shotlabels[j].setOpaque(true);
     }
+  }
+
+  public void visit(Board model) {
+    if (visited == false) {
+      for (int i  = 0; i < 10; i++) {
+        if (name.equals(model.sets[i].getName())) {
+          scene = model.sets[i].getScenecard();
+        }
+      }
+      Element cardxml = xml.getCardElement(scene.getTitle());
+      System.out.println(scene.getTitle());
+      System.out.println("../resources/" + cardxml.getTagName());
+      ImageIcon cIcon =  new ImageIcon("../resources/" + cardxml.getAttribute("img"));
+      cardlabel.setIcon(cIcon);
+    }
+
   }
 }

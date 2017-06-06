@@ -38,7 +38,7 @@ public class XMLParse {
   public Element getCardElement(String name) {
     Element card = null;
     try {
-      File boardXML = new File("../resources/board.xml");
+      File boardXML = new File("../resources/cards.xml");
       DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
       DocumentBuilder db = dbf.newDocumentBuilder();
       Document docBoard = db.parse(boardXML);
