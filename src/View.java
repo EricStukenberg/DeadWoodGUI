@@ -42,6 +42,8 @@ public class View extends JFrame {
   JButton bRole3;
   JButton bRole4;
 
+  JButton upgradeButtons[];
+
   Boolean bR4Created;
   Viewset sets[];
   ImageIcon icon;
@@ -105,6 +107,8 @@ public class View extends JFrame {
       }
     }
     buttons();
+    shwoUpgradeButtons();
+
   }
 
   //Controller stuff needs to be moveed
@@ -193,6 +197,41 @@ public class View extends JFrame {
              showPlayers(model.getNumberOfPlayers(), model);
              updateButtons();
           }
+       } else if (e.getSource() == bRole1) {
+
+       } else if (e.getSource() == bRole2) {
+
+       }  else if (e.getSource() == bRole3) {
+
+       }  else if (e.getSource() == bRole4) {
+
+       }  else {
+           int[][] prices = model.casting_office.getUpgradePrices();
+           int cLevel = 2;
+           int dLevel = 2;
+           int xOffset = 0;
+           System.out.println("The player is in the " + currPlayer.getLocation().getName() + " is trying to upgrade");
+           for(int j = 0; j < 10; j++) {
+             if(e.getSource() == upgradeButtons[j]) {
+               System.out.println("The player is in the clicked a button");
+               if((j%2) == 0) {
+                 System.out.println("level input " + dLevel);
+                 model.upgradeMoney(dLevel, currPlayer);
+                 break;
+               } else {
+                 System.out.println("level input " + cLevel);
+                 model.upgradeCredit(cLevel, currPlayer);
+                 break;
+               }
+             }
+             if((j%2) == 0) {
+               dLevel++;
+             } else {
+               cLevel++;
+             }
+           }
+           showPlayers(model.getNumberOfPlayers(), model);
+           showPlayers(model.getNumberOfPlayers(), model);
        }
     }
     public void mousePressed(MouseEvent e) {
@@ -356,6 +395,29 @@ public class View extends JFrame {
 
    }
 
+   //shows display upgrade buttons
+   public void shwoUpgradeButtons() {
+     upgradeButtons = new JButton[10];
+     int xOffset = 0;
+     int yOffset = 0;
+     for(int i = 0; i < 10; i++) {
+       upgradeButtons[i] = new JButton();
+       upgradeButtons[i].setBackground(Color.white);
+       upgradeButtons[i].setBounds(98 + xOffset,543 + yOffset,25, 21);
+       upgradeButtons[i].addMouseListener(new boardMouseListener());
+       upgradeButtons[i].setOpaque(false);
+       bPane.add(upgradeButtons[i], new Integer(2));
+       xOffset = xOffset + 45;
+       if((i%2) != 0) {
+         xOffset = 0;
+         yOffset = yOffset + 21;
+       }
+     }
+
+
+   }
+
+  //updates the main action buttons
   public void updateButtons() {
     Player player = model.getCurrPlayer();
     Set location = player.getLocation();
@@ -390,6 +452,7 @@ public class View extends JFrame {
     updateSceneButtons(location, player);
   }
 
+  //updates the taking a role button
   public void updateRoleButtons(Set location, Player player) {
 
     if(!(location.getName().equals("Trailers")) && !(location.getName().equals("Casting Office"))) {
@@ -653,4 +716,5 @@ public class View extends JFrame {
         }
       }
   }
+
 }

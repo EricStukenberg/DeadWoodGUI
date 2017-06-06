@@ -267,7 +267,7 @@ class Board {
                 onCardRoles[i].setActor(currPlayer);
 
               }
-          }
+            }
           }
         }
 
@@ -275,13 +275,13 @@ class Board {
         System.out.println("Player is already in a role");
       }
     }
-    private void upgradeMoney(String[] words, Player currPlayer) {
+    public void upgradeMoney(int num, Player currPlayer) {
       try {
         if (currPlayer.getLocation().getName().equals("Casting Office")) {
-          int level = Integer.parseInt(words[2]);
+          int level = num;
           int[][] priceTable = casting_office.getUpgradePrices();
           if(level > 1 && level < 7) {
-            int price = priceTable[level - 1][0];
+            int price = priceTable[level - 2][0];
             System.out.println(price);
             if (price > currPlayer.getMoney()) {
               System.out.println("Insufficient money for upgrade");
@@ -306,13 +306,15 @@ class Board {
       }
     }
 
-    private void upgradeCredit(String[] words, Player currPlayer) {
+    public void upgradeCredit(int num, Player currPlayer) {
       try {
+        System.out.println("Location " +  currPlayer.getLocation().getName());
         if (currPlayer.getLocation().getName().equals("Casting Office")) {
-          int level = Integer.parseInt(words[2]);
+          int level = num;
+          System.out.println("Level trying to upgrade to " + num);
           int[][] priceTable = casting_office.getUpgradePrices();
           if(level > 1 && level < 7) {
-            int price = priceTable[level - 1][1];
+            int price = priceTable[level - 2][1];
             System.out.println(price);
             if (price > currPlayer.getCredits()) {
               System.out.println("Insufficient credits for upgrade");
