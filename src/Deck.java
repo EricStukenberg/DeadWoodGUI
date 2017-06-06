@@ -84,11 +84,8 @@ class Deck {
 
         for (int i = 0; i < scenes.get(count).getNumofRoles(); i++) {
           scenes.get(count).getRole(i).setName(scan.next());
-         // System.out.println(scenes.get(count).roles[i].getName());
           scenes.get(count).getRole(i).setRank(scan.nextInt());
-          //System.out.println(scenes.get(count).roles[i].getRank());
           scenes.get(count).getRole(i).setLine(scan.next());
-          //System.out.println(scenes.get(count).roles[i].getLine());
           scenes.get(count).getRole(i).setOnCard();
         }
         count++;

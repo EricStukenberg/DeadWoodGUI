@@ -50,6 +50,9 @@ public class View extends JFrame {
   boolean bRolesCreated;
   Boolean bRolesCreated1;
   Boolean bRolesCreated2;
+  boolean bSceneCreated;
+  Boolean bSceneCreated1;
+  Boolean bSceneCreated2;
   Boolean playLabelCreated;
   // JLayered Pane
   JLayeredPane bPane;
@@ -63,6 +66,9 @@ public class View extends JFrame {
     bRolesCreated = false;
     bRolesCreated1 = false;
     bRolesCreated2 = false;
+    bSceneCreated = false;
+    bSceneCreated1 = false;
+    bSceneCreated2 = false;
     playLabelCreated = false;
 
     // Set the exit option for the JFrame
@@ -171,9 +177,8 @@ public class View extends JFrame {
            showPlayers(model.getNumberOfPlayers(), model);
            updateButtons();
 
-
        } else if (e.getSource()== bRoom4){
-          if(rooms[3] != null) {
+          if (rooms[3] != null) {
              String roomName = rooms[3].getName();
              System.out.println("%%%%%% Moving to " + roomName);
              moved = true;
@@ -188,16 +193,7 @@ public class View extends JFrame {
              showPlayers(model.getNumberOfPlayers(), model);
              updateButtons();
           }
-       } else if (e.getSource() == bRole1) {
-
-       } else if (e.getSource() == bRole2) {
-
-       }  else if (e.getSource() == bRole3) {
-
-       }  else if (e.getSource() == bRole4) {
-
        }
-
     }
     public void mousePressed(MouseEvent e) {
     }
@@ -368,7 +364,6 @@ public class View extends JFrame {
     int numNB = 0;
     for(int i = 0; i < 4; i++) {
       if(neighbors[i] != null) {
-        //System.out.println("Num rooms " + numNB);
         numNB++;
       }
     }
@@ -392,15 +387,16 @@ public class View extends JFrame {
     bRoom4.setText(room4);
     bPane.add(bRoom4, new Integer(2));
     updateRoleButtons(location, player);
+    updateSceneButtons(location, player);
   }
 
   public void updateRoleButtons(Set location, Player player) {
 
     if(!(location.getName().equals("Trailers")) && !(location.getName().equals("Casting Office"))) {
-      if(bRolesCreated == false) {
+      if (bRolesCreated == false) {
         bRolesCreated = true;
 
-        lRoles = new JLabel("ROLES");
+        lRoles = new JLabel("OFF CARD ROLES");
         lRoles.setBounds(icon.getIconWidth()+10, 240,200, 20);
         Color customColor = new Color(4, 106, 161);
         lRoles.setForeground(customColor);
@@ -426,7 +422,7 @@ public class View extends JFrame {
         bPane.add(bRole2, new Integer(2));
         bRole2.addMouseListener(new boardMouseListener());
 
-        if(numRoles > 2) {
+        if (numRoles > 2) {
 
           Role role3 = location.getRole(2);
           String roleName3 = role3.getName();
@@ -435,7 +431,7 @@ public class View extends JFrame {
           bRole3.setBounds(icon.getIconWidth()+10,300,200, 20);
           bPane.add(bRole3, new Integer(2));
           bRole3.addMouseListener(new boardMouseListener());
-          if(numRoles > 3) {
+          if (numRoles > 3) {
             Role role4 = location.getRole(3);
             String roleName4 = role4.getName();
             bRole4 = new JButton("Take " + roleName4);
@@ -469,7 +465,7 @@ public class View extends JFrame {
               bRolesCreated1 = true;
               bRole3 = new JButton("Take " + roleName3);
               bRole3.setBackground(Color.lightGray);
-              bRole3.setBounds(icon.getIconWidth()+10,300,200, 20);
+              bRole3.setBounds(icon.getIconWidth()+10, 300, 200, 20);
               bPane.add(bRole3, new Integer(2));
               bRole3.addMouseListener(new boardMouseListener());
             } else {
@@ -483,11 +479,11 @@ public class View extends JFrame {
               Role role4 = location.getRole(3);
               String roleName4 = role4.getName();
 
-              if(bRolesCreated2 == false) {
+              if (bRolesCreated2 == false) {
                 bRolesCreated2 = true;
                 bRole4 = new JButton("Take " + roleName4);
                 bRole4.setBackground(Color.lightGray);
-                bRole4.setBounds(icon.getIconWidth()+230,300,200, 20);
+                bRole4.setBounds(icon.getIconWidth()+230, 300, 200, 20);
                 bPane.add(bRole4, new Integer(2));
                 bRole4.addMouseListener(new boardMouseListener());
               } else {
@@ -500,11 +496,11 @@ public class View extends JFrame {
                 bPane.add(bRole4, new Integer(2));
             }
           } else {
-            if(bRolesCreated1 == false) {
+            if (bRolesCreated1 == false) {
               bRolesCreated1 = true;
               bRole3 = new JButton(" ");
               bRole3.setBackground(Color.lightGray);
-              bRole3.setBounds(icon.getIconWidth()+10,300,200, 20);
+              bRole3.setBounds(icon.getIconWidth()+10, 300, 200, 20);
               bPane.add(bRole3, new Integer(2));
               bRole3.addMouseListener(new boardMouseListener());
             } else {
@@ -512,22 +508,139 @@ public class View extends JFrame {
               bPane.add(bRole3, new Integer(2));
             }
 
-            if(bRolesCreated2 == false) {
+            if (bRolesCreated2 == false) {
               bRolesCreated2 = true;
               bRole4 = new JButton(" ");
               bRole4.setBackground(Color.lightGray);
-              bRole4.setBounds(icon.getIconWidth()+230,300,200, 20);
+              bRole4.setBounds(icon.getIconWidth()+230, 300, 200, 20);
               bPane.add(bRole4, new Integer(2));
               bRole4.addMouseListener(new boardMouseListener());
             } else {
-
               bRole4.setText(" ");
               bPane.add(bRole4, new Integer(2));
             }
           }
         }
       } else {
-        if(bRolesCreated == true) {
+        if (bRolesCreated == true) {
+          bRole1.setText(" ");
+          bPane.add(bRole1, new Integer(2));
+          bRole2.setText(" ");
+          bPane.add(bRole2, new Integer(2));
+          bRole3.setText(" ");
+          bPane.add(bRole3, new Integer(2));
+          bRole4.setText(" ");
+          bPane.add(bRole4, new Integer(2));
+
+        }
+      }
+  }
+
+  public void updateSceneButtons(Set location, Player player) {
+
+    if(!(location.getName().equals("Trailers")) && !(location.getName().equals("Casting Office"))) {
+      if (bSceneCreated == false) {
+        bSceneCreated = true;
+
+        lRoles = new JLabel("ON CARD ROLES");
+        lRoles.setBounds(icon.getIconWidth()+10, 440, 400, 20);
+        Color customColor = new Color(4, 106, 161);
+        lRoles.setForeground(customColor);
+        lRoles.setFont(new Font("Courier New", Font.BOLD, 18));
+        bPane.add(lRoles,new Integer(2));
+
+        Scene scene = location.getScenecard();
+        int numRoles = scene.getNumofRoles();
+        System.out.println("\n\nNum of on card roles " + numRoles + " roles have been created \n\n\n\n\n");
+
+        Role role1 = scene.getRole(0);
+        String roleName1 = role1.getName();
+        bRole1 = new JButton("Take " + roleName1);
+        bRole1.setBackground(Color.lightGray);
+        bRole1.setBounds(icon.getIconWidth()+10, 470, 200, 20);
+        bPane.add(bRole1, new Integer(2));
+        bRole1.addMouseListener(new boardMouseListener());
+
+        Role role2 = scene.getRole(1);
+        String roleName2 = role2.getName();
+        bRole2 = new JButton("Take " + roleName2);
+        bRole2.setBackground(Color.lightGray);
+        bRole2.setBounds(icon.getIconWidth()+230, 470, 200, 20);
+        bPane.add(bRole2, new Integer(2));
+        bRole2.addMouseListener(new boardMouseListener());
+
+        if (numRoles > 2) {
+
+          Role role3 = scene.getRole(2);
+          String roleName3 = role3.getName();
+          bRole3 = new JButton("Take " + roleName3);
+          bRole3.setBackground(Color.lightGray);
+          bRole3.setBounds(icon.getIconWidth()+10, 500, 200, 20);
+          bPane.add(bRole3, new Integer(2));
+          bRole3.addMouseListener(new boardMouseListener());
+        }
+      } else {
+          Scene scene = location.getScenecard();
+          int numRoles = scene.getNumofRoles();
+          System.out.println("\n\nNum roles " + numRoles + " updated roles \n\n\n\n");
+
+          Role role1 = scene.getRole(0);
+          String roleName1 = role1.getName();
+          bRole1.setText("Take " + roleName1);
+          bPane.add(bRole1, new Integer(2));
+
+          Role role2 = scene.getRole(1);
+          String roleName2 = role2.getName();
+          System.out.println("Role " + roleName2);
+          bRole2.setText("Take " + roleName2);
+          bPane.add(bRole2, new Integer(2));
+
+
+          if(numRoles > 2) {
+
+            Role role3 = scene.getRole(2);
+            String roleName3 = role3.getName();
+            if(bSceneCreated1 == false) {
+              bSceneCreated1 = true;
+              bRole3 = new JButton("Take " + roleName3);
+              bRole3.setBackground(Color.lightGray);
+              bRole3.setBounds(icon.getIconWidth()+10,500,200, 20);
+              bPane.add(bRole3, new Integer(2));
+              bRole3.addMouseListener(new boardMouseListener());
+            } else {
+              System.out.println("Role " + roleName3);
+              bRole3.setText("Take " + roleName3);
+              bPane.add(bRole3, new Integer(2));
+            }
+
+
+            if (bSceneCreated1 == false) {
+              bSceneCreated1 = true;
+              bRole3 = new JButton(" ");
+              bRole3.setBackground(Color.lightGray);
+              bRole3.setBounds(icon.getIconWidth()+10,500,200, 20);
+              bPane.add(bRole3, new Integer(2));
+              bRole3.addMouseListener(new boardMouseListener());
+            } else {
+              bRole3.setText(" ");
+              bPane.add(bRole3, new Integer(2));
+            }
+
+            if (bSceneCreated2 == false) {
+              bSceneCreated2 = true;
+              bRole4 = new JButton(" ");
+              bRole4.setBackground(Color.lightGray);
+              bRole4.setBounds(icon.getIconWidth()+230,500,200, 20);
+              bPane.add(bRole4, new Integer(2));
+              bRole4.addMouseListener(new boardMouseListener());
+            } else {
+              bRole4.setText(" ");
+              bPane.add(bRole4, new Integer(2));
+            }
+          }
+        }
+      } else {
+        if (bSceneCreated == true) {
           bRole1.setText(" ");
           bPane.add(bRole1, new Integer(2));
           bRole2.setText(" ");

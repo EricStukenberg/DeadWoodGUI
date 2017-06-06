@@ -500,9 +500,7 @@ class Board {
 
          for (int i = 0; i < sets[count].getNumofRoles(); i++) {
            sets[count].getRole(i).setName(scan.next());
-           System.out.println(sets[count].getRole(i).getName());
            sets[count].getRole(i).setRank(scan.nextInt());
-           System.out.println(sets[count].getRole(i).getRank());
            sets[count].getRole(i).setLine(scan.next());
          }
          count++;
