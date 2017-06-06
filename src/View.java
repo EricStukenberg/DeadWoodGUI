@@ -101,7 +101,7 @@ public class View extends JFrame {
       }
     }
     buttons();
-    shwoUpgradeButtons();
+    showUpgradeButtons();
 
   }
 
@@ -391,7 +391,7 @@ public class View extends JFrame {
    }
 
    //shows display upgrade buttons
-   public void shwoUpgradeButtons() {
+   public void showUpgradeButtons() {
      upgradeButtons = new JButton[10];
      int xOffset = 0;
      int yOffset = 0;
