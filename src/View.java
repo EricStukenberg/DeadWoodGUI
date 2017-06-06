@@ -203,7 +203,7 @@ public class View extends JFrame {
              updateButtons();
           }
        } else if (e.getSource() == bRole1) {
-         }
+         
 
        } else if (e.getSource() == bRole2) {
 

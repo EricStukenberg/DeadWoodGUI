@@ -98,16 +98,6 @@ class Board {
         System.out.println("*************************  " + "It is the " + currPlayer.getName() + " player's turn." + "  *************************");
         //input = "reading";
         while(endClick == false) {
-          // if (scanner.Next() != \n) {
-          //   //input = scanner.nextLine();
-          // }
-          // System.out.println(input);
-          // if(endClick) {
-          //   System.out.println("breaking");
-          //   break;
-          // }
-          // input = "1";
-
         }
         currPlayer.canMove = true;
         currPlayer.canAct = true;
@@ -115,44 +105,6 @@ class Board {
     }
    }
 
-
-  //  // begin game helper function
-  //  public boolean readUserInput(Player currPlayer) {
-  //    String[] words = new String[3];
-  //    if (input != "reading") {
-  //      System.out.println(input);
-  //    }
-  //    words = input.split("\\s+");
-  //    int len = words.length;
-  //    if(input.equals("who")) {
-  //      who(currPlayer);
-  //    } else if(input.equals("Where")) {
-  //      where(currPlayer);
-  //    } else if(words[0].equals("move") && len > 1 && currPlayer.canMove) {
-  //      movePlayer(currPlayer, words, len);
-   //
-  //    } else if(words[0].equals("work") && len > 1) {
-  //      work(currPlayer,  words, len);
-   //
-  //    } else if(words[0].equals("upgrade") && len == 3) {
-  //       if(words[1].equals("cr")) {
-  //         upgradeCredit(words, currPlayer);
-  //       }
-  //       if(words[1].equals("$")) {
-  //         upgradeMoney(words, currPlayer);
-  //       }
-   //
-  //    } else if(words[0].equals("Rehearse") && currPlayer.canAct) {
-  //      rehearse(currPlayer);
-  //    } else if(words[0].equals("act") && currPlayer.canAct) {
-  //      act(currPlayer);
-  //    } else if(input.equals("end")) {
-  //      System.out.println("End turn is Selected should return false");
-  //      return false;
-  //    }
-  //    input = "reading";
-  //    return true;
-  //   }
 
     // who helper function
     public String who(Player currPlayer) {
