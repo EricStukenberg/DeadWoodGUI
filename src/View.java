@@ -132,6 +132,7 @@ public class View extends JFrame {
              model.endClick = true;
              currPlayer = model.getCurrPlayer();
              model = model;
+             moved = false;
              showPlayers(model.getNumberOfPlayers(), model);
              showPlayers(model.getNumberOfPlayers(), model);
              updateButtons();
@@ -139,52 +140,39 @@ public class View extends JFrame {
 
        } else if (e.getSource()== bRoom1){
           String roomName = rooms[0].getName();
-          moved = true;
-          currPlayer.move(roomName);
-          for (int j = 0; i < 10; i++) {
-            if (sets[i].name.equals(roomName)) {
-              sets[i].visit(model);
+          if(moved == false) {
+              moved = true;
+              currPlayer.move(roomName);
+            for (int j = 0; i < 10; i++) {
+              if (sets[i].name.equals(roomName)) {
+                sets[i].visit(model);
+              }
             }
+            String newLoc = currPlayer.getLocation().getName();
+            System.out.println("The player moved to " + newLoc);
+            showPlayers(model.getNumberOfPlayers(), model);
+            updateButtons();
           }
-          String newLoc = currPlayer.getLocation().getName();
-          System.out.println("The player moved to " + newLoc);
-          showPlayers(model.getNumberOfPlayers(), model);
-          updateButtons();
-
 
        } else if (e.getSource()== bRoom2){
            String roomName = rooms[1].getName();
-           moved = true;
-           currPlayer.move(roomName);
-           for (int j = 0; i < 10; i++) {
-             if (sets[i].name.equals(roomName)) {
-               sets[i].visit(model);
+           if(moved == false) {
+               moved = true;
+               currPlayer.move(roomName);
+             for (int j = 0; i < 10; i++) {
+               if (sets[i].name.equals(roomName)) {
+                 sets[i].visit(model);
+               }
              }
+             String newLoc = currPlayer.getLocation().getName();
+             System.out.println("The player moved to " + newLoc);
+             showPlayers(model.getNumberOfPlayers(), model);
+             updateButtons();
            }
-           String newLoc = currPlayer.getLocation().getName();
-           System.out.println("The player moved to " + newLoc);
-           showPlayers(model.getNumberOfPlayers(), model);
-           updateButtons();
-
 
        } else if (e.getSource()== bRoom3){
            String roomName = rooms[2].getName();
-           moved = true;
-           currPlayer.move(roomName);
-           for (int j = 0; i < 10; i++) {
-             if (sets[i].name.equals(roomName)) {
-               sets[i].visit(model);
-             }
-           }
-           String newLoc = currPlayer.getLocation().getName();
-           System.out.println("The player moved to " + newLoc);
-           showPlayers(model.getNumberOfPlayers(), model);
-           updateButtons();
-
-       } else if (e.getSource()== bRoom4){
-          if (rooms[3] != null) {
-             String roomName = rooms[3].getName();
-             System.out.println("%%%%%% Moving to " + roomName);
+           if(moved == false) {
              moved = true;
              currPlayer.move(roomName);
              for (int j = 0; i < 10; i++) {
@@ -196,6 +184,24 @@ public class View extends JFrame {
              System.out.println("The player moved to " + newLoc);
              showPlayers(model.getNumberOfPlayers(), model);
              updateButtons();
+           }
+       } else if (e.getSource()== bRoom4){
+          if (rooms[3] != null) {
+             String roomName = rooms[3].getName();
+             System.out.println("%%%%%% Moving to " + roomName);
+             if(moved == false) {
+              moved = true;
+                currPlayer.move(roomName);
+               for (int j = 0; i < 10; i++) {
+                 if (sets[i].name.equals(roomName)) {
+                   sets[i].visit(model);
+                 }
+               }
+               String newLoc = currPlayer.getLocation().getName();
+               System.out.println("The player moved to " + newLoc);
+               showPlayers(model.getNumberOfPlayers(), model);
+               updateButtons();
+             }
           }
        } else if (e.getSource() == bRole1) {
 
@@ -210,16 +216,13 @@ public class View extends JFrame {
            int cLevel = 2;
            int dLevel = 2;
            int xOffset = 0;
-           System.out.println("The player is in the " + currPlayer.getLocation().getName() + " is trying to upgrade");
            for(int j = 0; j < 10; j++) {
              if(e.getSource() == upgradeButtons[j]) {
-               System.out.println("The player is in the clicked a button");
                if((j%2) == 0) {
-                 System.out.println("level input " + dLevel);
                  model.upgradeMoney(dLevel, currPlayer);
                  break;
                } else {
-                 System.out.println("level input " + cLevel);
+
                  model.upgradeCredit(cLevel, currPlayer);
                  break;
                }
@@ -352,7 +355,6 @@ public class View extends JFrame {
      int numNB = 0;
      for(int i = 0; i < 4; i++) {
        if(neighbors[i] != null) {
-         System.out.println("Num rooms " + numNB);
          numNB++;
        }
      }
@@ -421,7 +423,6 @@ public class View extends JFrame {
   public void updateButtons() {
     Player player = model.getCurrPlayer();
     Set location = player.getLocation();
-    System.out.println("Updating at " + location.getName());
     Set[] neighbors = location.getAdjacentRooms();
     int numNB = 0;
     for(int i = 0; i < 4; i++) {
@@ -440,7 +441,6 @@ public class View extends JFrame {
     bPane.add(bRoom3, new Integer(2));
 
     String room4 = "  ";
-    System.out.println("Num rooms " + numNB);
     if(numNB == 4 ) {
       room4 = neighbors[3].getName();
       room4 = "Move to " + room4;
@@ -467,7 +467,6 @@ public class View extends JFrame {
         bPane.add(lRoles,new Integer(2));
 
         int numRoles = location.getNumofRoles();
-        System.out.println("\n\nNum roles " + numRoles + " roles have been created \n\n\n\n\n");
 
         Role role1 = location.getRole(0);
         String roleName1 = role1.getName();
@@ -506,8 +505,6 @@ public class View extends JFrame {
         }
       } else {
           int numRoles = location.getNumofRoles();
-          System.out.println("\n\nNum roles " + numRoles + " updated roles \n\n\n\n");
-
           Role role1 = location.getRole(0);
           String roleName1 = role1.getName();
           bRole1.setText("Take " + roleName1);
@@ -515,7 +512,6 @@ public class View extends JFrame {
 
           Role role2 = location.getRole(1);
           String roleName2 = role2.getName();
-          System.out.println("Role " + roleName2);
           bRole2.setText("Take " + roleName2);
           bPane.add(bRole2, new Integer(2));
 
@@ -532,7 +528,6 @@ public class View extends JFrame {
               bPane.add(bRole3, new Integer(2));
               bRole3.addMouseListener(new boardMouseListener());
             } else {
-              System.out.println("Role " + roleName3);
               bRole3.setText("Take " + roleName3);
               bPane.add(bRole3, new Integer(2));
             }
@@ -614,8 +609,6 @@ public class View extends JFrame {
 
         Scene scene = location.getScenecard();
         int numRoles = scene.getNumofRoles();
-        System.out.println("\n\nNum of on card roles " + numRoles + " roles have been created \n\n\n\n\n");
-
         Role role1 = scene.getRole(0);
         String roleName1 = role1.getName();
         bRole1 = new JButton("Take " + roleName1);
@@ -645,8 +638,6 @@ public class View extends JFrame {
       } else {
           Scene scene = location.getScenecard();
           int numRoles = scene.getNumofRoles();
-          System.out.println("\n\nNum roles " + numRoles + " updated roles \n\n\n\n");
-
           Role role1 = scene.getRole(0);
           String roleName1 = role1.getName();
           bRole1.setText("Take " + roleName1);
@@ -654,7 +645,6 @@ public class View extends JFrame {
 
           Role role2 = scene.getRole(1);
           String roleName2 = role2.getName();
-          System.out.println("Role " + roleName2);
           bRole2.setText("Take " + roleName2);
           bPane.add(bRole2, new Integer(2));
 
@@ -671,7 +661,6 @@ public class View extends JFrame {
               bPane.add(bRole3, new Integer(2));
               bRole3.addMouseListener(new boardMouseListener());
             } else {
-              System.out.println("Role " + roleName3);
               bRole3.setText("Take " + roleName3);
               bPane.add(bRole3, new Integer(2));
             }

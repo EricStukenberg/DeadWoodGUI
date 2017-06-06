@@ -282,7 +282,6 @@ class Board {
           int[][] priceTable = casting_office.getUpgradePrices();
           if(level > 1 && level < 7) {
             int price = priceTable[level - 2][0];
-            System.out.println(price);
             if (price > currPlayer.getMoney()) {
               System.out.println("Insufficient money for upgrade");
             }
@@ -308,14 +307,11 @@ class Board {
 
     public void upgradeCredit(int num, Player currPlayer) {
       try {
-        System.out.println("Location " +  currPlayer.getLocation().getName());
         if (currPlayer.getLocation().getName().equals("Casting Office")) {
           int level = num;
-          System.out.println("Level trying to upgrade to " + num);
           int[][] priceTable = casting_office.getUpgradePrices();
           if(level > 1 && level < 7) {
             int price = priceTable[level - 2][1];
-            System.out.println(price);
             if (price > currPlayer.getCredits()) {
               System.out.println("Insufficient credits for upgrade");
             }
