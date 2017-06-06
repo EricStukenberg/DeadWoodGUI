@@ -205,6 +205,7 @@ class Board {
         currPlayer.move(moveTo);
       }
     }
+
     private void work(Player currPlayer, String[] words, int len) {
       Set currLocation = currPlayer.getLocation();
       String currRole;
@@ -380,6 +381,7 @@ class Board {
         }
     }
     }
+
    // ends the day for the game
    private void endDay() {
      createSets();
@@ -392,6 +394,7 @@ class Board {
        System.exit(0);
      }
    }
+
    // ends the game for the player
    public void endGame() {
      for (int i = 0; i < numberOfPlayers; i++) {
@@ -447,6 +450,7 @@ class Board {
      sets[9] = new Set("General Store", 2, 2, 370, 330);
      sceneCount = 10;
      createBoardLayout();
+     readSetRoles();
 
    }
 
@@ -498,9 +502,9 @@ class Board {
 
          for (int i = 0; i < sets[count].getNumofRoles(); i++) {
            sets[count].getRole(i).setName(scan.next());
-
+           System.out.println(sets[count].getRole(i).getName());
            sets[count].getRole(i).setRank(scan.nextInt());
-
+           System.out.println(sets[count].getRole(i).getRank());
            sets[count].getRole(i).setLine(scan.next());
          }
          count++;
