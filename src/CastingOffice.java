@@ -10,7 +10,7 @@ public class CastingOffice extends Set {
     super("Casting Office");
     name = "Casting Office";
     xCord = 9;
-    yCord = 459;
+    yCord = 400;
     createPriceTable();
   }
 
@@ -34,7 +34,7 @@ public class CastingOffice extends Set {
       int c = 0; /* column */
       upgradePrices[r][c] = dlr;
       upgradePrices[r][c+1] = crd;
-      dlr += dlrAddVal;
+      dlr = dlrAddVal + dlr;
       crd += 5;
       dlrAddVal += 2;
     }
