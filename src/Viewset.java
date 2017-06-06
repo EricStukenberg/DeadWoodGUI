@@ -72,6 +72,7 @@ public class Viewset extends JFrame {
           scene = model.sets[i].getScenecard();
         }
       }
+      
       Element cardxml = xml.getCardElement(scene.getTitle());
       System.out.println(scene.getTitle());
       System.out.println("../resources/" + cardxml.getTagName());
