@@ -624,6 +624,8 @@ public class View extends JFrame {
   public void updateSceneButtons(Set location, Player player) {
 
     if(!(location.getName().equals("Trailers")) && !(location.getName().equals("Casting Office"))) {
+      Scene scene = location.getScenecard();
+      int numRoles = scene.getNumofRoles();
       if (bSceneCreated == false) {
         bSceneCreated = true;
 
@@ -634,8 +636,7 @@ public class View extends JFrame {
         lRoles.setFont(new Font("Courier New", Font.BOLD, 18));
         bPane.add(lRoles,new Integer(2));
 
-        Scene scene = location.getScenecard();
-        int numRoles = scene.getNumofRoles();
+
         Role role1 = scene.getRole(0);
         String roleName1 = role1.getName();
         bOnRole1 = new JButton("Take " + roleName1);
@@ -662,9 +663,14 @@ public class View extends JFrame {
           bPane.add(bOnRole3, new Integer(2));
           bOnRole3.addMouseListener(new boardMouseListener());
         }
+        else {
+          bOnRole3 = new JButton(" ");
+          bOnRole3.setBackground(Color.lightGray);
+          bOnRole3.setBounds(icon.getIconWidth()+10, 500, 200, 20);
+          bPane.add(bOnRole3, new Integer(2));
+          bOnRole3.addMouseListener(new boardMouseListener());
+        }
       } else {
-          Scene scene = location.getScenecard();
-          int numRoles = scene.getNumofRoles();
           Role role1 = scene.getRole(0);
           String roleName1 = role1.getName();
           bOnRole1.setText("Take " + roleName1);
@@ -691,19 +697,13 @@ public class View extends JFrame {
               bOnRole3.setText("Take " + roleName3);
               bPane.add(bOnRole3, new Integer(2));
             }
-
-
-            if (bSceneCreated1 == false) {
-              bSceneCreated1 = true;
-              bOnRole3 = new JButton(" ");
-              bOnRole3.setBackground(Color.lightGray);
-              bOnRole3.setBounds(icon.getIconWidth()+10,500,200, 20);
-              bPane.add(bOnRole3, new Integer(2));
-              bOnRole3.addMouseListener(new boardMouseListener());
-            } else {
-              bOnRole3.setText(" ");
-              bPane.add(bOnRole3, new Integer(2));
-            }
+          }
+          else {
+            bOnRole3 = new JButton(" ");
+            bOnRole3.setBackground(Color.lightGray);
+            bOnRole3.setBounds(icon.getIconWidth()+10, 500, 200, 20);
+            bPane.add(bOnRole3, new Integer(2));
+            bOnRole3.addMouseListener(new boardMouseListener());
           }
         }
       } else {
@@ -712,14 +712,9 @@ public class View extends JFrame {
           bPane.add(bOnRole1, new Integer(2));
           bOnRole2.setText(" ");
           bPane.add(bOnRole2, new Integer(2));
-        //  if(bSceneCreated1 == true) {
-            bOnRole3.setText(" ");
-            bPane.add(bOnRole3, new Integer(2));
-
-        //  }
-
+          bOnRole3.setText(" ");
+          bPane.add(bOnRole3, new Integer(2));
         }
-      }
+    }
   }
-
 }
